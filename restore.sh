@@ -27,7 +27,7 @@ printf 'username=leonhard\npassword=%s\n' "$naspass" >~/.config/nas/leonhard-fil
 SECONDS=0
 read -r bus obj < <(kdialog --title Restore --progressbar "Restoring files from the NAS" 100)
 restic -r /mnt/nas/leonhard-files/restic/arch --password-file ~/.config/restic/password \
-	restore latest --target / --json |
+	restore latest --target / --include /home/leo --json |
 	jq --unbuffered -r 'select(.message_type == "status") | .percent_done * 100 | floor' |
 	while read -r p; do
 		qdbus "$bus" "$obj" Set "" value "$p"

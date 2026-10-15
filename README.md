@@ -49,6 +49,8 @@ Before: remove the old `arch` machine in the [Tailscale admin console](https://l
 ## Backups
 
 - Hourly btrfs snapshots of `/home` in `/mnt/btrfs/snapshots`. Restore a file with `cp`.
-- Daily restic to the NAS (`/mnt/nas/leonhard-files/restic/arch`):
+- Daily restic of `~`, `/var/lib` and the WiFi connections to the NAS (`/mnt/nas/leonhard-files/restic/arch`):
   `sudo restic-nas snapshots`, `sudo restic-nas restore latest --target /tmp/restore`.
+  After a reinstall, bring back WiFi and Bluetooth with
+  `sudo restic-nas restore latest --target / --include /var/lib/bluetooth --include /etc/NetworkManager/system-connections`.
 - Games on the RTX 3070: Steam launch option `nvidia-offload %command%`.

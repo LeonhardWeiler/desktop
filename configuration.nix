@@ -116,9 +116,9 @@ in
   services.desktopManager.plasma6.enable = true;
   services.displayManager.plasma-login-manager.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    discover
     elisa
     khelpcenter
+    konsole
     krdp
     kwin-x11
     plasma-browser-integration
@@ -131,6 +131,7 @@ in
   services.orca.enable = false;
   services.speechd.enable = false;
   services.geoclue2.enable = false;
+  services.fwupd.enable = false;
   networking.modemmanager.enable = false;
   documentation.nixos.enable = false;
   programs.nano.enable = false;
@@ -244,9 +245,14 @@ in
     repository = "/mnt/nas/leonhard-files/restic/arch";
     passwordFile = "/home/leo/.config/restic/password";
     initialize = true;
-    paths = [ "/home/leo" ];
+    paths = [
+      "/home/leo"
+      "/var/lib"
+      "/etc/NetworkManager/system-connections"
+    ];
     exclude = [
       "/home/leo/.cache"
+      "/var/lib/docker"
       "/home/leo/.local/share/Steam"
       "/home/leo/go"
       "/home/leo/.local/share/go"
@@ -336,7 +342,6 @@ in
       filelight
       kolourpaint
       isoimagewriter
-      yakuake
       keepsecret
       kio-admin
       kdegraphics-thumbnailers
