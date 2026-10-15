@@ -22,19 +22,29 @@ Not in the repo. They live in `~` and come back with the restore:
 
 ## Install
 
-1. Remove the old `arch` machine in the Tailscale admin console.
-2. Boot the NixOS graphical ISO and connect to WiFi.
-3. Partition (wipes the whole SSD) and install:
+Before: remove the old `arch` machine in the [Tailscale admin console](https://login.tailscale.com/admin/machines).
+
+1. Plug the stick directly into the laptop, power on, press F12 and pick the stick.
+   If it does not boot, turn off Secure Boot in the BIOS (F2).
+2. In the live system connect to WiFi in the panel. The keyboard is US QWERTY there. Open Konsole:
    ```sh
    sudo nix --experimental-features 'nix-command flakes' run github:nix-community/disko/latest -- \
-     --mode destroy,format,mount --flake github:leonhardweiler/desktop#arch
-   sudo nixos-install --no-root-passwd --flake github:leonhardweiler/desktop#arch
+     --mode destroy,format,mount --flake github:LeonhardWeiler/desktop#arch
+   sudo nixos-install --no-root-passwd --flake github:LeonhardWeiler/desktop#arch
    sudo nixos-enter --root /mnt -c 'passwd leo'
+   reboot
    ```
-4. Reboot, log in and connect to WiFi. `restore` asks for the Bitwarden password,
-   opens the Tailscale login, asks for the NAS password, restores `~` from the
-   latest restic snapshot and reboots. It runs on every login until
-   `~/files/repos/desktop` exists.
+   disko asks before it wipes the SSD, answer `yes`. The install takes 20 to 60 minutes.
+   `passwd` sets the login password and already uses Colemak DH. Pull the stick when the screen goes black.
+3. Log in as `leo` and connect to WiFi. `restore` starts on its own:
+   - asks for the Bitwarden master password while Helium opens the Tailscale login,
+   - asks for the NAS password of `leonhard`,
+   - restores `~` from the latest restic snapshot with a progress bar and reboots.
+
+   It runs on every login until `~/files/repos/desktop` exists.
+   If it fails, run `restore` in a terminal to see why.
+4. Log in to the Bitwarden desktop app once, server `https://nas.taild9564d.ts.net:8443`.
+   Everything else comes back with `~`.
 
 ## Backups
 
