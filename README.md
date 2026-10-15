@@ -14,10 +14,11 @@ nix flake update   # then rebuild
 
 ## Secrets
 
-Not in the repo, copy them by hand:
+Not in the repo, copy them by hand as root with mode 600. A copy is in `/mnt/nas/leonhard-files/archive/backup/arch-2026-10-15/etc.tar`:
 
 - `/etc/samba/credentials/share-<share>`: `username=…` and `password=…`
-- `/etc/restic/password`
+- `/etc/restic/password`: the restic password, nothing else
+- `/etc/NetworkManager/system-connections/`: WiFi
 - `~/.ssh/id_ed25519`
 
 ## Install
