@@ -50,6 +50,7 @@ let
     ".local/bin/clipboard_sanitize"
     ".local/share/applications/voxtype-toggle.desktop"
     ".local/share/applications/org.mixxx.Mixxx.desktop"
+    ".local/share/applications/t3code.desktop"
     ".local/share/wallpapers"
     ".mixxx/Custom.kbd.cfg"
     ".mixxx/soundconfig.xml"

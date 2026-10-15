@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Development
+Comment=Minimal web GUI for coding agents
+Exec=t3code-desktop %U
+Icon=t3code
+Name=T3 Code (Alpha)
+StartupWMClass=com.t3tools.T3Code
+Terminal=false
+Type=Application
+Version=1.5
