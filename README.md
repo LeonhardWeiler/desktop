@@ -14,26 +14,27 @@ nix flake update   # then rebuild
 
 ## Secrets
 
-Not in the repo, copy them by hand as root with mode 600. A copy is in `/mnt/nas/leonhard-files/archive/backup/arch-2026-10-15/etc.tar`:
+Not in the repo. They live in `~` and come back with the restore:
 
-- `/etc/samba/credentials/share-<share>`: `username=…` and `password=…`
-- `/etc/restic/password`: the restic password, nothing else
-- `/etc/NetworkManager/system-connections/`: WiFi
-- `~/.ssh/id_ed25519`
+- `~/.config/nas/<share>`: `username=…` and `password=…`
+- `~/.config/restic/password`, also in Bitwarden as item `restic`
+- `~/.ssh`
 
 ## Install
 
-1. Boot the NixOS graphical ISO and connect to WiFi.
-2. Partition (wipes the whole SSD) and install:
+1. Remove the old `arch` machine in the Tailscale admin console.
+2. Boot the NixOS graphical ISO and connect to WiFi.
+3. Partition (wipes the whole SSD) and install:
    ```sh
    sudo nix --experimental-features 'nix-command flakes' run github:nix-community/disko/latest -- \
      --mode destroy,format,mount --flake github:leonhardweiler/desktop#arch
    sudo nixos-install --no-root-passwd --flake github:leonhardweiler/desktop#arch
    sudo nixos-enter --root /mnt -c 'passwd leo'
    ```
-3. Copy the secrets to `/mnt/etc/…` and `/mnt/home/leo/.ssh`, then reboot.
-4. `git clone git@github.com:leonhardweiler/desktop ~/files/repos/desktop`, log out and in again.
-5. Log in once: `tailscale up`, `claude`, `gh auth login`, Bitwarden (server `https://nas.taild9564d.ts.net:8443`), Helium.
+4. Reboot, log in and connect to WiFi. `restore` asks for the Bitwarden password,
+   opens the Tailscale login, asks for the NAS password, restores `~` from the
+   latest restic snapshot and reboots. It runs on every login until
+   `~/files/repos/desktop` exists.
 
 ## Backups
 

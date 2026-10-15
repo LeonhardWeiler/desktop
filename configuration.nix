@@ -1,6 +1,20 @@
 { pkgs, ... }:
 let
   repo = "/home/leo/files/repos/desktop";
+  helium = pkgs.callPackage ./pkgs/helium.nix { };
+  restore = pkgs.writeShellApplication {
+    name = "restore";
+    runtimeInputs = with pkgs; [
+      helium
+      tailscale
+      bitwarden-cli
+      restic
+      jq
+      kdePackages.kdialog
+      kdePackages.qttools
+    ];
+    text = builtins.readFile ./restore.sh;
+  };
   links = [
     ".bashrc"
     ".bash_profile"
@@ -67,6 +81,19 @@ in
   zramSwap.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (_: prev: {
+      linux-firmware = prev.linux-firmware.overrideAttrs rec {
+        version = "20260810";
+        src = prev.fetchFromGitLab {
+          owner = "kernel-firmware";
+          repo = "linux-firmware";
+          tag = version;
+          hash = "sha256-P/fPpqaatp8Z2GV+I/OChiWGn6AhV+8w1RMFuX/LqHc=";
+        };
+      };
+    })
+  ];
   nix.settings = {
     experimental-features = [
       "nix-command"
@@ -83,6 +110,7 @@ in
 
   networking.networkmanager.enable = true;
   services.tailscale.enable = true;
+  services.tailscale.extraSetFlags = [ "--operator=leo" ];
   hardware.bluetooth.enable = true;
   services.fstrim.enable = true;
 
@@ -145,6 +173,13 @@ in
     ];
   };
 
+  environment.etc."xdg/autostart/restore.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Restore
+    Exec=${restore}/bin/restore
+  '';
+
   systemd.user.tmpfiles.users.leo.rules = map (p: "L+ %h/${p} - - - - ${repo}/home/${p}") links;
 
   fileSystems = builtins.listToAttrs (
@@ -163,7 +198,7 @@ in
           "x-systemd.after=tailscaled.service"
           "nofail"
           "soft"
-          "credentials=/etc/samba/credentials/share-${s}"
+          "credentials=/home/leo/.config/nas/${s}"
           "uid=1000"
           "gid=100"
           "file_mode=0664"
@@ -190,12 +225,13 @@ in
 
   services.restic.backups.nas = {
     repository = "/mnt/nas/leonhard-files/restic/arch";
-    passwordFile = "/etc/restic/password";
+    passwordFile = "/home/leo/.config/restic/password";
     initialize = true;
     paths = [ "/home/leo" ];
     exclude = [
       "/home/leo/.cache"
       "/home/leo/.local/share/Steam"
+      "/home/leo/go"
       "/home/leo/.local/share/go"
       "/home/leo/.local/share/voxtype/models"
       "/home/leo/.npm"
@@ -223,7 +259,8 @@ in
 
   environment.systemPackages =
     (with pkgs; [
-      (callPackage ./pkgs/helium.nix { })
+      helium
+      restore
       (callPackage ./pkgs/eitype.nix { })
       (voxtype.override { vulkanSupport = true; })
       t3code
