@@ -209,7 +209,6 @@ in
         options = [
           "noauto"
           "x-systemd.automount"
-          "x-systemd.idle-timeout=300"
           "x-systemd.mount-timeout=15"
           "x-systemd.device-timeout=15"
           "_netdev"
