@@ -6,4 +6,4 @@ Exec=voxtype record toggle
 Icon=audio-input-microphone
 Terminal=false
 NoDisplay=true
-X-KDE-Shortcuts=Meta+Shift+W
+X-KDE-Shortcuts=Meta+Space

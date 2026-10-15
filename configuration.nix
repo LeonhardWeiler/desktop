@@ -120,12 +120,14 @@ in
     kwin-x11
     plasma-browser-integration
   ];
+  programs.kde-pim.enable = false;
 
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
     jack.enable = true;
+    extraLv2Packages = [ pkgs.lsp-plugins ];
   };
   security.rtkit.enable = true;
   security.pam.loginLimits = [
@@ -155,7 +157,9 @@ in
     enable = true;
     extensions = [
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+      "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
     ];
+    extraOpts.RestoreOnStartup = 1;
   };
 
   users.users.leo = {
