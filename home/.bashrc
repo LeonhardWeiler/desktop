@@ -34,6 +34,7 @@ export BROWSER=helium
 
 alias open='xdg-open'
 alias dot='cd $HOME/files/repos/desktop'
+alias rebuild='sudo nixos-rebuild switch --flake $HOME/files/repos/desktop#arch'
 alias notes='cd $HOME/files/repos/notes/'
 alias arst='sudo shutdown now'
 alias todo='nvim ./AGENT/TODO.md'

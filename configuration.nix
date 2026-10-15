@@ -188,6 +188,7 @@ in
       "docker"
       "audio"
       "input"
+      "dialout"
     ];
   };
 
