@@ -59,9 +59,6 @@ let
     "leonhard-files"
     "shared-files"
     "old-drive"
-    "karoline-files"
-    "florian-files"
-    "eva-files"
   ];
 in
 {
