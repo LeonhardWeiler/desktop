@@ -32,6 +32,8 @@ let
     ".config/powerdevilrc"
     ".config/kscreenlockerrc"
     ".config/kxkbrc"
+    ".config/baloofilerc"
+    ".config/dolphinrc"
     ".config/kdeglobals"
     ".config/kdedefaults"
     ".config/kwinrc"
@@ -114,13 +116,25 @@ in
   services.desktopManager.plasma6.enable = true;
   services.displayManager.plasma-login-manager.enable = true;
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    discover
     elisa
     khelpcenter
     krdp
     kwin-x11
     plasma-browser-integration
+    plasma-keyboard
+    plasma-workspace-wallpapers
+    qrca
+    qtvirtualkeyboard
   ];
   programs.kde-pim.enable = false;
+  services.orca.enable = false;
+  services.speechd.enable = false;
+  services.geoclue2.enable = false;
+  networking.modemmanager.enable = false;
+  documentation.nixos.enable = false;
+  programs.nano.enable = false;
+  environment.defaultPackages = [ ];
 
   services.pipewire = {
     enable = true;
@@ -148,6 +162,7 @@ in
 
   hardware.nvidia.prime.offload.enableOffloadCmd = true;
   virtualisation.docker.enable = true;
+  virtualisation.docker.enableOnBoot = false;
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
   programs.partition-manager.enable = true;
@@ -158,6 +173,7 @@ in
     extensions = [
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
+      "edibdbjcniadpccecjdfdjjppcpchdlm" # I still don't care about cookies
     ];
     extraOpts.RestoreOnStartup = 1;
   };
