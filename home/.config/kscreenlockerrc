@@ -1,6 +1,6 @@
 [Daemon]
-Autolock=true
-Timeout=15
+Autolock=false
+LockOnResume=false
 
 [Greeter][Wallpaper][org.kde.image][General]
 Image=file:///home/leo/.local/share/wallpapers/Apple-Monterey/contents/splash/images/background.jpg

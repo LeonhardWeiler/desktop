@@ -7,7 +7,8 @@ TurnOffDisplayWhenIdle=false
 profile=balanced
 
 [AC][SuspendAndShutdown]
-AutoSuspendAction=0
+AutoSuspendAction=1
+AutoSuspendIdleTimeoutSec=1800
 LidAction=0
 
 [Battery][Display]
@@ -21,7 +22,8 @@ UseProfileSpecificDisplayBrightness=true
 profile=power-saver
 
 [Battery][SuspendAndShutdown]
-AutoSuspendAction=0
+AutoSuspendAction=1
+AutoSuspendIdleTimeoutSec=1800
 LidAction=0
 
 [LowBattery][Display]
@@ -35,5 +37,6 @@ UseProfileSpecificDisplayBrightness=true
 profile=power-saver
 
 [LowBattery][SuspendAndShutdown]
-AutoSuspendAction=0
+AutoSuspendAction=1
+AutoSuspendIdleTimeoutSec=1800
 LidAction=0
