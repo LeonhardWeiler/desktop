@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=voxtype
+Comment=Dictation daemon (voice to text), toggled with Meta+Shift+W
+Exec=voxtype daemon
+Terminal=false
+X-GNOME-Autostart-enabled=true
+OnlyShowIn=KDE;
