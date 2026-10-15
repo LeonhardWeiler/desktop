@@ -49,6 +49,7 @@ plugin=org.kde.plasma.icontasks
 
 [Containments][2][Applets][5][Configuration][General]
 launchers=applications:com.mitchellh.ghostty.desktop,applications:t3code.desktop,applications:helium.desktop
+showToolTips=false
 
 [Containments][2][Applets][6]
 immutability=1
@@ -168,6 +169,10 @@ lastScreen=0
 location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
+
+[Containments][28][Wallpaper][org.kde.image][General]
+Image=file:///home/leo/.local/share/wallpapers/monterey-dark.jpg
+SlidePaths=/home/leo/.local/share/wallpapers/
 
 [ScreenMapping]
 itemsOnDisabledScreens=

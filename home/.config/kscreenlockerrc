@@ -3,5 +3,5 @@ Autolock=false
 LockOnResume=false
 
 [Greeter][Wallpaper][org.kde.image][General]
-Image=file:///home/leo/.local/share/wallpapers/Apple-Monterey/contents/splash/images/background.jpg
-PreviewImage=file:///home/leo/.local/share/wallpapers/Apple-Monterey/contents/splash/images/background.jpg
+Image=file:///home/leo/.local/share/wallpapers/monterey-dark.jpg
+PreviewImage=file:///home/leo/.local/share/wallpapers/monterey-dark.jpg
