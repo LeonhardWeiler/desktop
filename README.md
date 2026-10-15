@@ -2,9 +2,9 @@
 
 NixOS config for my Lenovo Legion 5 Pro 16ARH7H: KDE Plasma, btrfs, Colemak DH.
 
-- `configuration.nix`: system, programs, NAS shares, backups, dotfile links.
-- `disko.nix`: btrfs with subvolumes `root`, `home`, `nix`, `snapshots`.
-- `home/`: dotfiles. Each path in `links` in `configuration.nix` is symlinked into `~`, so edits apply without a rebuild.
+- `modules/`: flake-parts modules, loaded by import-tree. Each file adds features to `flake.modules.nixos`; `arch.nix` builds the host from all of them.
+- `modules/disko.nix`: btrfs with subvolumes `root`, `home`, `nix`, `snapshots`.
+- `home/`: dotfiles. Each path in `modules/dotfiles.nix` is symlinked into `~`, so edits apply without a rebuild.
 - `pkgs/`: Helium and eitype, which nixpkgs does not have.
 
 ```sh
