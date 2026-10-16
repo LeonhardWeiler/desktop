@@ -7,6 +7,7 @@
         scripts = with pkgs.mpvScripts; [
           autoload
           dynamic-crop
+          modernz
           mpv-gallery-view
           thumbfast
         ];
@@ -21,6 +22,7 @@
           prefetch-playlist = true;
           force-seekable = true;
           save-position-on-quit = true;
+          watch-later-options-remove = "sub-pos";
           x11-bypass-compositor = false;
           keep-open = "always";
           screenshot-format = "png";
@@ -66,21 +68,21 @@
           UP = "add volume 5";
           DOWN = "add volume -5";
         };
-        scriptOpts.osc = {
-          vidscale = false;
-          seekbarhandlesize = 0.65;
-          timefontsize = 15;
-          tooltipfontsize = 16;
-          fontweight = "semibold";
-          seekbarfgcolor = "FFFFFF";
-          seekbarfgheight = 17;
-          seekbarbgalpha = 196;
+        scriptOpts.modernz = {
+          vidscale = "no";
+          show_title = false;
+          window_controls = false;
+          time_font_size = 15;
+          tooltip_font_size = 16;
+          seek_handle_size = 0.65;
+          seekbarfg_color = "#FFFFFF";
+          seek_handle_color = "#FFFFFF";
+          seek_handle_border_color = "#FFFFFF";
+          hover_effect_color = "#FFFFFF";
+          nibble_color = "#FFFFFF";
           seekrangealpha = 128;
         };
       };
-      xdg.configFile = {
-        "mpv/scripts".source = ./mpv/scripts;
-        "mpv/fonts".source = "${pkgs.mpvScripts.mpv-osc-modern}/share/fonts/truetype";
-      };
+      xdg.configFile."mpv/fonts".source = "${pkgs.mpvScripts.modernz}/share/fonts/truetype";
     };
 }
