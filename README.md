@@ -1,50 +1,34 @@
 # desktop
 
-NixOS config for my Lenovo Legion 5 Pro 16ARH7H: KDE Plasma, btrfs, Colemak DH.
+NixOS config for my Lenovo Legion 5 Pro: KDE Plasma, btrfs, Colemak DH.
+Each file in `modules/` is one feature.
 
-- `modules/`: flake-parts modules, loaded by import-tree. Each file adds features to `flake.modules.nixos` and `flake.modules.homeManager`; `legion.nix` builds the host from all of them, `home.nix` hands the home modules to home-manager with plasma-manager.
-- `modules/disko.nix`: btrfs with subvolumes `root`, `home`, `nix`, `snapshots`.
-- `modules/mixxx/skin/`: recolors the LateNight skin, built into the Nix store.
+## Use
 
 ```sh
-sudo nixos-rebuild switch --flake ~/files/repos/desktop
-update             # nix flake update, rebuild, commit and push flake.lock
-nix fmt
+rebuild    # apply the config
+update     # update inputs, rebuild, commit and push flake.lock
+nix fmt    # format
 ```
 
-## Secrets
-
-`modules/secrets.yaml` is encrypted with sops for the age key in `~/.config/sops/age/keys.txt`,
-also in Bitwarden as item `sops-age`. Edit with `sops modules/secrets.yaml`.
-The secrets are decrypted to `/run/secrets` at boot and as soon as the key exists.
-`~/.ssh` comes back with the restore.
+Secrets live in `modules/secrets.yaml`, edit with `sops modules/secrets.yaml`.
+The age key is in Bitwarden as `sops-age`.
 
 ## Install
 
-Before: remove the old `legion` machine in the [Tailscale admin console](https://login.tailscale.com/admin/machines).
-
-1. Plug the stick directly into the laptop, power on, press F12 and pick the stick.
-   If it does not boot, turn off Secure Boot in the BIOS (F2).
-2. In the live system connect to WiFi in the panel. The keyboard is US QWERTY there. Open Konsole:
+1. Remove the old `legion` machine in the [Tailscale admin console](https://login.tailscale.com/admin/machines).
+2. Boot the stick (F12; if it fails, turn off Secure Boot with F2).
+3. Connect to WiFi, open Konsole and run:
    ```sh
    bash <(curl -L coprime.tech/legion)
    ```
-   Answer `yes` to wipe the SSD. After 20 to 60 minutes set the login password (already Colemak DH).
-   It reboots; pull the stick when the screen goes black.
-3. Log in as `leo` and connect to WiFi. `restore` starts on its own:
-   - asks for the Bitwarden master password while Helium opens the Tailscale login,
-   - restores `~` from the latest restic snapshot with a progress bar and reboots.
-
-   It runs on every login until `~/files/repos/desktop` exists.
-   If it fails, run `restore` in a terminal to see why.
-4. Log in to the Bitwarden desktop app once, server `https://nas.taild9564d.ts.net:8443`.
-   Everything else comes back with `~`.
+   Answer `yes`, set the password, pull the stick when the screen goes black.
+4. Log in as `leo`, connect to WiFi. `restore` runs on its own and brings back `~` from the NAS.
+5. Log in to the Bitwarden app, server `https://nas.taild9564d.ts.net:8443`.
 
 ## Backups
 
-- Hourly btrfs snapshots of `/home` in `/mnt/btrfs/snapshots`. Restore a file with `cp`.
-- Daily restic of `~`, `/var/lib` and the WiFi connections to the NAS (`/mnt/nas/leonhard-files/restic/legion`):
-  `sudo restic-nas snapshots`, `sudo restic-nas restore latest --target /tmp/restore`.
-  After a reinstall, bring back WiFi and Bluetooth with
-  `sudo restic-nas restore latest --target / --include /var/lib/bluetooth --include /etc/NetworkManager/system-connections`.
-- Games on the RTX 3070: Steam launch option `nvidia-offload %command%`.
+- Hourly btrfs snapshots of `/home` in `/mnt/btrfs/snapshots`.
+- Daily restic to the NAS: `sudo restic-nas snapshots`, `sudo restic-nas restore latest --target /tmp/restore`.
+
+Games on the RTX 3070: Steam launch option `nvidia-offload %command%`.
