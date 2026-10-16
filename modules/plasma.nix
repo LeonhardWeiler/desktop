@@ -145,10 +145,6 @@ in
             "Alt+O"
             "Alt+F4"
           ];
-          plasmashell = {
-            "next activity" = "Meta+A";
-            "previous activity" = "Meta+Shift+A";
-          };
           "services/com.mitchellh.ghostty.desktop"._launch = "Alt+Space";
           "services/helium.desktop"._launch = "Alt+N";
           "services/org.kde.krunner.desktop"._launch = [
@@ -186,7 +182,6 @@ in
           };
           baloofilerc."Basic Settings".Indexing-Enabled = false;
           krunnerrc.Plugins.baloosearchEnabled = false;
-          kactivitymanagerdrc.activities.a4874b3f-ac87-4f9d-ae97-9e2a3b739115 = "Default";
           powerdevilrc = lib.genAttrs [ "AC/Display" "Battery/Display" "LowBattery/Display" ] (_: {
             TurnOffDisplayWhenIdle = false;
           });
