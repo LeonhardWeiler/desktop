@@ -12,6 +12,7 @@
           user.email = "leonhard-weiler@hotmail.com";
           user.name = "Leonhard Weiler";
           core.editor = "nvim";
+          init.defaultBranch = "main";
         };
         signing = {
           format = "ssh";
