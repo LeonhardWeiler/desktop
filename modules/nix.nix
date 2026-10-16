@@ -1,15 +1,11 @@
-{ config, ... }:
 {
   flake.modules.nixos.nix = {
     system.stateVersion = "26.11";
     nixpkgs.config.allowUnfree = true;
-    nix.settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      trusted-users = [ config.user ];
-    };
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     nix.gc = {
       automatic = true;
       dates = "weekly";
