@@ -1,7 +1,0 @@
-[Daemon]
-Autolock=false
-LockOnResume=false
-
-[Greeter][Wallpaper][org.kde.image][General]
-Image=file:///home/leo/.local/share/wallpapers/monterey-dark.jpg
-PreviewImage=file:///home/leo/.local/share/wallpapers/monterey-dark.jpg

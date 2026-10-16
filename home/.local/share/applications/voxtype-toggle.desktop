@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Dictation (voxtype)
-Comment=Start/stop a voxtype recording
-Exec=voxtype record toggle
-Icon=audio-input-microphone
-Terminal=false
-NoDisplay=true
-X-KDE-Shortcuts=Meta+Space
