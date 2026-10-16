@@ -22,7 +22,7 @@ The age key is in Bitwarden as `sops-age`.
    ```sh
    bash <(curl -L coprime.tech/legion)
    ```
-4. Log in as `leo`, connect to WiFi. `restore` runs on its own, brings back `~` from the NAS and restarts the laptop.
+4. Log in as `leo`, connect to WiFi. `restore` runs on its own, asks for the Bitwarden master password and the password of `leo`, brings back `~`, WiFi and Bluetooth from the NAS and restarts the laptop.
 5. Log in to the Bitwarden app, server `https://nas.taild9564d.ts.net:8443`.
 
 ### From another machine with nixos-anywhere
