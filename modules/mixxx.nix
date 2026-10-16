@@ -3,8 +3,7 @@
     { lib, pkgs, ... }:
     let
       skin = pkgs.runCommand "mixxx-skin" { nativeBuildInputs = [ pkgs.ffmpeg-headless ]; } ''
-        MIXXX_SKIN_DIR=${pkgs.mixxx}/share/mixxx/skins MIXXX_SETTINGS_DIR=$out XDG_CONFIG_HOME=$out \
-          sh ${./mixxx/skin}/build-skin
+        sh ${./mixxx/skin}/build-skin ${pkgs.mixxx}/share/mixxx/skins/LateNight $out
       '';
     in
     {

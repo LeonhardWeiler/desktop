@@ -1,35 +1,3 @@
-# SPDX-License-Identifier: ISC
-# Copyright (C) 2026 The leonhardweiler/dotfiles Authors
-#
-# Rewrite colors into the palette. Two modes, one rule:
-#
-#   default        stdin is text (SVG/QSS/XML); rewrite every color literal
-#                  in it and print the text back.
-#   MODE=pixels    stdin is `od -An -tu1 -v -w4` output of a raw RGBA image,
-#                  one pixel per line; write the recolored pixels back as raw
-#                  bytes. This exists because the VU meters ship as PNG, not
-#                  SVG, and a bright green level bar is not something the skin
-#                  can be left with. Doing it here rather than with an image
-#                  filter keeps the color rule in exactly one place.
-#                  Must be run under LC_ALL=C: that is what makes awk's %c
-#                  emit one byte rather than a multi-byte UTF-8 encoding.
-#
-# The rule, in one sentence: keep the lightness, replace hue and saturation.
-# Lightness is what upstream encodes a button's *state* in - unpressed,
-# pressed, hovered, disabled are the same hue at different L, and every
-# gradient and drop shadow is a lightness ramp. Rewriting only H and S
-# therefore recolors the skin without flattening any of it.
-#
-# Reads the palette on the command line (see build-skin); everything it needs
-# arrives as -v assignments plus the HUE_FAMILIES string.
-#
-# Recognises #rgb, #argb, #rrggbb and #aarrggbb. Alpha is carried through
-# untouched. Two things that look like colors but are not, and are skipped:
-# a run of hex digits followed by another alphanumeric character, which is an
-# identifier (`url(#defs)`), and anything preceded by `&`, which is an XML
-# character reference - `&#8855;` is the circled-times glyph on a button, and
-# rewriting it as #88/#554446 both breaks the label and produces invalid XML.
-
 function hex2num(s,   i, c, n, d) {
     n = 0
     for (i = 1; i <= length(s); i++) {
@@ -47,8 +15,6 @@ function num2hex(n,   d) {
     d = "0123456789abcdef"
     return substr(d, int(n / 16) + 1, 1) substr(d, (n % 16) + 1, 1)
 }
-
-# --- RGB <-> HSL, all channels 0..1 except hue in degrees -------------------
 
 function rgb2hsl(r, g, b,   mx, mn, d) {
     mx = (r > g ? r : g); if (b > mx) mx = b
@@ -82,9 +48,6 @@ function hsl2hex(h, s, l,   q, p, hk) {
            num2hex(hue2rgb(p, q, hk - 1/3) * 255)
 }
 
-# --- The palette -----------------------------------------------------------
-
-# Split "345 360 warn|0 14 warn|..." into parallel arrays once.
 function load_families(   n, i, parts, f) {
     n = split(HUE_FAMILIES, parts, "|")
     for (i = 1; i <= n; i++) {
@@ -96,13 +59,11 @@ function load_families(   n, i, parts, f) {
     FAM_N = n
 }
 
-# Hue of a palette color, as the target for a family.
 function family_target(hex,   r, g, b) {
     r = hex2num(substr(hex, 2, 2)) / 255
     g = hex2num(substr(hex, 4, 2)) / 255
     b = hex2num(substr(hex, 6, 2)) / 255
     rgb2hsl(r, g, b)
-    # HSL_H is left in place for the caller.
 }
 
 function target_hue(h,   i) {
@@ -110,8 +71,6 @@ function target_hue(h,   i) {
         if (h >= FAM_FROM[i] && h <= FAM_TO[i]) return FAM_HEX[i]
     return FAM_HEX[1]
 }
-
-# --- The rule itself -------------------------------------------------------
 
 function convert(rgb,   r, g, b, h, s, l, tgt, th, ns) {
     if (rgb in CACHE) return CACHE[rgb]
@@ -123,43 +82,29 @@ function convert(rgb,   r, g, b, h, s, l, tgt, th, ns) {
     h = HSL_H; s = HSL_S; l = HSL_L
 
     if (s * 100 <= NEUTRAL_MAX_S) {
-        # Already neutral. Upstream's greys are the same greys we want.
         CACHE[rgb] = rgb
         return rgb
     }
 
     if (s * 100 <= SURFACE_MAX_S) {
-        # A tinted surface, not an accent - PaleMoon's warm moonlight cast on
-        # button faces and panels. Flatten it to true grey so the skin reads
-        # neutral like the terminal does.
         CACHE[rgb] = hsl2hex(0, 0, l)
         return CACHE[rgb]
     }
 
-    # A real accent. Map its hue onto the palette and pull the saturation into
-    # the muted band; a 100%-saturated upstream orange must not come out as a
-    # neon green.
     tgt = target_hue(h)
     family_target(tgt)
     th = HSL_H
 
     ns = ACCENT_MIN_S + (ACCENT_MAX_S - ACCENT_MIN_S) \
          * (s * 100 - SURFACE_MAX_S) / (100 - SURFACE_MAX_S)
-    # A light tint reads far louder than a dark one at the same saturation.
     if (l * 100 > BRIGHT_L) ns *= BRIGHT_S_FACTOR
     CACHE[rgb] = hsl2hex(th, ns / 100, l)
     return CACHE[rgb]
 }
 
-# --- Scanning --------------------------------------------------------------
-
 function is_alnum(c) { return c ~ /^[0-9A-Za-z_]$/ }
 
 BEGIN { load_families() }
-
-# --- Pixel mode ------------------------------------------------------------
-# Fully transparent pixels carry no visible color; recoloring them would only
-# change what shows through a resize filter later.
 
 MODE == "pixels" {
     a = $4
@@ -180,8 +125,6 @@ MODE == "pixels" {
 
         digits = substr(tok, 2)
         n = length(digits)
-        # An identifier that merely starts with hex digits is not a color,
-        # and neither is an XML character reference.
         if ((rest != "" && is_alnum(substr(rest, 1, 1))) \
             || (pre != "" && substr(pre, length(pre), 1) == "&")) {
             out = out pre tok
