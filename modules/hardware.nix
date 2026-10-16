@@ -11,19 +11,6 @@
     boot.kernelModules = [ "kvm-amd" ];
     hardware.enableRedistributableFirmware = true;
     nixpkgs.hostPlatform = "x86_64-linux";
-    nixpkgs.overlays = [
-      (_: prev: {
-        linux-firmware = prev.linux-firmware.overrideAttrs rec {
-          version = "20260810";
-          src = prev.fetchFromGitLab {
-            owner = "kernel-firmware";
-            repo = "linux-firmware";
-            tag = version;
-            hash = "sha256-P/fPpqaatp8Z2GV+I/OChiWGn6AhV+8w1RMFuX/LqHc=";
-          };
-        };
-      })
-    ];
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.configurationLimit = 10;
