@@ -1,10 +1,7 @@
 {
   flake.modules.nixos.ssh.programs.ssh.knownHosts = {
     nas = {
-      hostNames = [
-        "nas"
-        "100.65.0.90"
-      ];
+      hostNames = [ "nas" ];
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII2UYM1qDrRKft+G6VBhxMeyrmw3vskRFUj5F+l88c1O";
     };
     server = {

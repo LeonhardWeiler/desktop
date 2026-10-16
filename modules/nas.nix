@@ -11,7 +11,7 @@ in
           (s: {
             name = "/mnt/nas/${s}";
             value = {
-              device = "//100.65.0.90/${s}";
+              device = "//nas.taild9564d.ts.net/${s}";
               fsType = "cifs";
               options = [
                 "noauto"
