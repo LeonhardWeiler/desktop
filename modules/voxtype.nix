@@ -27,15 +27,11 @@
       home.packages = [
         (pkgs.voxtype.override { vulkanSupport = true; })
         eitype
-        pkgs.wtype
         pkgs.quickshell
       ];
       xdg.configFile."voxtype/config.toml".source = toml.generate "config.toml" {
-        state_file = "auto";
         hotkey.enabled = false;
         audio = {
-          device = "default";
-          sample_rate = 16000;
           max_duration_secs = 300;
           feedback = {
             enabled = true;
@@ -46,12 +42,9 @@
         whisper = {
           model = "large-v3-turbo";
           language = "de";
-          on_demand_loading = false;
         };
         output = {
-          mode = "type";
           driver_order = [
-            "wtype"
             "eitype"
             "clipboard"
           ];
@@ -60,10 +53,8 @@
           type_delay_ms = 2;
         };
         osd = {
-          enabled = true;
           frontend = "quickshell";
           style = "handy";
-          position = "bottom-center";
           width_px = 180;
           top_margin = 0.9;
         };
