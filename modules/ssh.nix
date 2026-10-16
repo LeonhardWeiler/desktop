@@ -1,6 +1,7 @@
 {
   flake.modules.nixos.ssh.programs.ssh = {
     startAgent = true;
+    enableAskPassword = true;
     extraConfig = "AddKeysToAgent yes";
     knownHosts = {
       nas = {
