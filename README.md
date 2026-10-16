@@ -22,13 +22,15 @@ The age key is in Bitwarden as `sops-age`.
    ```sh
    bash <(curl -L coprime.tech/legion)
    ```
-   Answer `yes`, set the password, pull the stick when the screen goes black.
 4. Log in as `leo`, connect to WiFi. `restore` runs on its own, brings back `~` from the NAS and restarts the laptop.
 5. Log in to the Bitwarden app, server `https://nas.taild9564d.ts.net:8443`.
 
 ### From another machine with nixos-anywhere
 
-The other machine needs Nix and must reach the laptop over SSH, e.g. in the same WiFi.
+The other machine must reach the laptop over SSH, e.g. in the same WiFi, and needs Nix:
+
+- Linux and macOS: `sh <(curl -L https://nixos.org/nix/install) --daemon`, then open a new terminal.
+- Windows: `wsl --install` in PowerShell, reboot, open Ubuntu and run the Linux command there.
 
 1. Boot the laptop from the minimal NixOS ISO, connect with `nmtui`.
    Run `passwd` to allow SSH logins and note the IP from `ip a`.
