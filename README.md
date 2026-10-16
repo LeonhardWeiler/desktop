@@ -17,8 +17,8 @@ The age key is in Bitwarden as `sops-age`.
 ## Install
 
 1. Remove the old `legion` machine in the [Tailscale admin console](https://login.tailscale.com/admin/machines).
-2. Boot the stick (F12; if it fails, turn off Secure Boot with F2).
-3. Connect to WiFi, open Konsole and run:
+2. Boot the [minimal NixOS ISO](https://nixos.org/download/#nixos-iso) from a stick (F12; if it fails, turn off Secure Boot with F2).
+3. Run `nmtui` to connect to WiFi, then run:
    ```sh
    bash <(curl -L coprime.tech/legion)
    ```
