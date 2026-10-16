@@ -1,6 +1,11 @@
 {
   flake.modules.homeManager.plasma =
-    { lib, osConfig, ... }:
+    {
+      config,
+      lib,
+      osConfig,
+      ...
+    }:
     let
       wallpaper = builtins.path {
         path = ./plasma/monterey-dark.jpg;
@@ -35,7 +40,8 @@
       hidden = "[Desktop Entry]\nHidden=true\n";
     in
     {
-      xdg.configFile."autostart/org.kde.kunifiedpush-distributor.desktop".text = hidden;
+      xdg.configFile."systemd/user/kunifiedpush-distributor.service".source =
+        config.lib.file.mkOutOfStoreSymlink "/dev/null";
       xdg.dataFile =
         lib.genAttrs
           (map (id: "applications/org.kde.${id}.desktop") [
