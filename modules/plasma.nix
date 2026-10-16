@@ -48,7 +48,7 @@ in
     {
       systemd.user.services.refresh-rate = {
         Unit = {
-          Description = "Panel refresh rate by power source";
+          Description = "Panel scale and refresh rate by power source";
           PartOf = [ "graphical-session.target" ];
           After = [ "graphical-session.target" ];
         };
@@ -71,7 +71,7 @@ in
                     kscreen-doctor $(kscreen-doctor -j | jq -r --arg hz "$hz" '
                       .outputs[] | select(.name | startswith("eDP"))
                       | .currentModeId as $id | (.modes[] | select(.id == $id).size) as $s
-                      | "output.\(.name).mode.\($s.width)x\($s.height)@\($hz)"')
+                      | "output.\(.name).mode.\($s.width)x\($s.height)@\($hz)", "output.\(.name).scale.1.25"')
                     last=$hz
                   fi
                   read -r _ || exit
