@@ -2,10 +2,7 @@
   flake.modules.nixos.packages =
     { pkgs, ... }:
     {
-      virtualisation.docker.enable = true;
-      virtualisation.docker.enableOnBoot = false;
       programs.steam.enable = true;
-      programs.kdeconnect.enable = true;
       programs.partition-manager.enable = true;
 
       programs.chromium = {
@@ -28,14 +25,12 @@
           signal-desktop
           teams-for-linux
           zed-editor
-          scribus
           ktailctl
           ktimetracker
           figma-agent
           ghostty
           quickshell
           obs-studio
-          audacity
           mixxx
           lsp-plugins
           gcc
@@ -60,7 +55,6 @@
           mat2
           qpdf
           ps_mem
-          internetarchive
           wl-clipboard
           wtype
           android-tools
@@ -73,11 +67,9 @@
           qt6Packages.qt6ct
         ])
         ++ (with pkgs.kdePackages; [
-          kdenlive
           kcalc
           filelight
           kolourpaint
-          isoimagewriter
           keepsecret
           kio-admin
           kdegraphics-thumbnailers

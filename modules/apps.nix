@@ -7,28 +7,17 @@
         associations.added = {
           "text/markdown" = [
             "dev.zed.Zed.desktop"
-            "org.kde.kate.desktop"
-            "org.kde.kwrite.desktop"
             "okularApplication_md.desktop"
             "okularApplication_txt.desktop"
             "nvim.desktop"
-            "org.kde.ghostwriter.desktop"
-            "org.kde.calligrawords_ascii.desktop"
           ];
           "text/vnd.typst" = [
             "dev.zed.Zed.desktop"
-            "org.kde.kate.desktop"
-            "org.kde.kwrite.desktop"
-            "org.kde.ghostwriter.desktop"
             "nvim.desktop"
             "okularApplication_txt.desktop"
-            "org.kde.calligrawords_ascii.desktop"
           ];
           "video/mp4" = [
             "mpv.desktop"
-            "org.kde.dragonplayer.desktop"
-            "org.kde.kdenlive.desktop"
-            "org.kde.koko.desktop"
           ];
           "x-scheme-handler/bitwarden" = "bitwarden.desktop";
         };

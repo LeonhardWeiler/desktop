@@ -26,7 +26,6 @@
         ];
         exclude = [
           "/home/leo/.cache"
-          "/var/lib/docker"
           "/home/leo/.local/share/Steam"
           "/home/leo/go"
           "/home/leo/.local/share/go"

@@ -29,8 +29,21 @@
         displayBrightness = brightness;
         powerProfile = profile;
       };
+      hidden = "[Desktop Entry]\nHidden=true\n";
     in
     {
+      xdg.configFile."autostart/org.kde.kunifiedpush-distributor.desktop".text = hidden;
+      xdg.dataFile =
+        lib.genAttrs
+          (map (id: "applications/org.kde.${id}.desktop") [
+            "kinfocenter"
+            "kmenuedit"
+            "kwalletmanager"
+            "plasma-systemmonitor"
+          ])
+          (_: {
+            text = hidden;
+          });
       programs.plasma = {
         enable = true;
         workspace = {
@@ -118,6 +131,7 @@
             };
           };
           baloofilerc."Basic Settings".Indexing-Enabled = false;
+          krunnerrc.Plugins.baloosearchEnabled = false;
           kactivitymanagerdrc.activities.a4874b3f-ac87-4f9d-ae97-9e2a3b739115 = "Default";
           powerdevilrc = lib.genAttrs [ "AC/Display" "Battery/Display" "LowBattery/Display" ] (_: {
             TurnOffDisplayWhenIdle = false;

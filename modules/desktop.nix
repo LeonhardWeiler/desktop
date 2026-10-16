@@ -6,6 +6,7 @@
       services.displayManager.plasma-login-manager.enable = true;
       environment.plasma6.excludePackages = with pkgs.kdePackages; [
         elisa
+        kate
         khelpcenter
         konsole
         krdp
