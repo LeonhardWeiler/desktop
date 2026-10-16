@@ -28,8 +28,6 @@
           unzip
           file
           ffmpeg
-          exiftool
-          mat2
           qpdf
           ps_mem
           wl-clipboard
