@@ -29,7 +29,6 @@
         "wheel"
         "networkmanager"
         "audio"
-        "input"
         "dialout"
       ];
     };
