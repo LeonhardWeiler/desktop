@@ -16,7 +16,7 @@ wait $tailscale
 
 export BITWARDENCLI_APPDATA_DIR=$tmp/bw
 bw config server "https://$NAS:8443" >/dev/null
-BW_SESSION=$(BW_PASSWORD=$bwpass bw login leonhard-weiler@hotmail.com --passwordenv BW_PASSWORD --raw)
+BW_SESSION=$(BW_PASSWORD=$bwpass bw login "$EMAIL" --passwordenv BW_PASSWORD --raw)
 export BW_SESSION
 umask 077
 mkdir -p "$(dirname "$SOPS_AGE_KEY_FILE")"

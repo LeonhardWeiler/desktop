@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  inherit (config) user nas;
+  inherit (config) user nas email;
 in
 {
   flake.modules.nixos.restore =
@@ -19,6 +19,7 @@ in
           kdePackages.qttools
         ];
         runtimeEnv = {
+          EMAIL = email;
           MARKER = marker;
           NAS = nas;
           SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
