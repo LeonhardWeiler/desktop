@@ -32,9 +32,9 @@ The other machine must reach the laptop over SSH, e.g. in the same WiFi, and nee
 - Linux and macOS: `sh <(curl -L https://nixos.org/nix/install) --daemon`, then open a new terminal.
 - Windows: `wsl --install` in PowerShell, reboot, open Ubuntu and run the Linux command there.
 
-1. Boot the laptop from the minimal NixOS ISO, connect with `nmtui`.
-   Run `passwd` to allow SSH logins and note the IP from `ip a`.
-2. On the other machine run this, enter the IP and the `passwd` password, then the password for `leo`:
+1. Boot any Linux on the laptop, e.g. the minimal NixOS ISO, and connect to the internet.
+   Make sure SSH login works (on the NixOS ISO run `passwd`) and note the IP from `ip a`.
+2. On the other machine run this, enter `user@ip` and the SSH password, then the password for `leo`:
    ```sh
    bash <(curl -L coprime.tech/legion-anywhere)
    ```
