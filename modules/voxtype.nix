@@ -8,8 +8,28 @@
     }:
     let
       toml = pkgs.formats.toml { };
+      eitype = pkgs.rustPlatform.buildRustPackage rec {
+        pname = "eitype";
+        version = "0.2.2";
+        src = pkgs.fetchFromGitHub {
+          owner = "Adam-D-Lewis";
+          repo = "eitype";
+          tag = version;
+          hash = "sha256-s5g6METDi8/jPEwZursorYWN8X96VlyVPtd8dCCVIlw=";
+        };
+        cargoHash = "sha256-k0JU3Y83aPHgQpyiG6DXxBzdYSMOmH42kPCxXWtNtkQ=";
+        nativeBuildInputs = [ pkgs.pkg-config ];
+        buildInputs = [ pkgs.libxkbcommon ];
+        doCheck = false;
+      };
     in
     {
+      home.packages = [
+        (pkgs.voxtype.override { vulkanSupport = true; })
+        eitype
+        pkgs.wtype
+        pkgs.quickshell
+      ];
       xdg.configFile."voxtype/config.toml".source = toml.generate "config.toml" {
         state_file = "auto";
         hotkey.enabled = false;

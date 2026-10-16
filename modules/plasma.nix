@@ -2,7 +2,10 @@
   flake.modules.homeManager.plasma =
     { lib, osConfig, ... }:
     let
-      wallpaper = ./plasma/monterey-dark.jpg;
+      wallpaper = builtins.path {
+        path = ./plasma/monterey-dark.jpg;
+        name = "monterey-dark.jpg";
+      };
       desktop = "d84a00b2-e864-40e5-8264-7ee48d189e5a";
       tiling = {
         padding = 4;

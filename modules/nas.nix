@@ -1,3 +1,7 @@
+{ config, ... }:
+let
+  inherit (config) user;
+in
 {
   flake.modules.nixos.nas =
     { config, ... }:
@@ -19,8 +23,8 @@
                 "nofail"
                 "soft"
                 "credentials=${config.sops.secrets."nas/${s}".path}"
-                "uid=1000"
-                "gid=100"
+                "uid=${user}"
+                "gid=users"
                 "file_mode=0664"
                 "dir_mode=0775"
                 "iocharset=utf8"

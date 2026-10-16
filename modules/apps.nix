@@ -1,6 +1,6 @@
 {
   flake.modules.homeManager.apps =
-    { lib, ... }:
+    { lib, pkgs, ... }:
     {
       xdg.mimeApps = {
         enable = true;
@@ -40,7 +40,6 @@
             "text/vnd.typst" = "dev.zed.Zed.desktop";
             "video/mp4" = "mpv.desktop";
             "x-scheme-handler/claude-cli" = "claude-code-url-handler.desktop";
-            "x-scheme-handler/figma" = "figma-linux.desktop";
             "x-scheme-handler/sgnl" = "signal.desktop";
             "x-scheme-handler/signalcaptcha" = "signal.desktop";
             "x-scheme-handler/t3code" = "com.t3tools.T3Code.desktop";
@@ -48,6 +47,7 @@
           };
       };
 
+      home.packages = [ pkgs.t3code ];
       xdg.dataFile."applications/t3code.desktop".text = lib.generators.toINI { } {
         "Desktop Entry" = {
           Categories = "Development";

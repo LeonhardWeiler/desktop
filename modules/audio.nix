@@ -1,13 +1,16 @@
 {
   flake.modules.nixos.audio =
     { pkgs, ... }:
+    let
+      lv2 = [ pkgs.lsp-plugins ];
+    in
     {
       services.pipewire = {
         enable = true;
         alsa.enable = true;
         pulse.enable = true;
         jack.enable = true;
-        extraLv2Packages = [ pkgs.lsp-plugins ];
+        extraLv2Packages = lv2;
         extraConfig.pipewire."99-custom"."context.properties" = {
           "default.clock.rate" = 48000;
           "default.clock.allowed-rates" = [ 48000 ];
@@ -83,6 +86,7 @@
           value = "unlimited";
         }
       ];
+      environment.systemPackages = lv2;
       environment.sessionVariables.LV2_PATH = "/run/current-system/sw/lib/lv2";
     };
 }

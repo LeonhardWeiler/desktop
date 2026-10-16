@@ -6,7 +6,7 @@
       useGlobalPkgs = true;
       useUserPackages = true;
       sharedModules = [ inputs.plasma-manager.homeModules.plasma-manager ];
-      users.leo.imports = builtins.attrValues config.flake.modules.homeManager;
+      users.${config.user}.imports = builtins.attrValues config.flake.modules.homeManager;
     };
   };
 

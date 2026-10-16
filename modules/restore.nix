@@ -1,11 +1,11 @@
 {
   flake.modules.nixos.restore =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     let
       restore = pkgs.writeShellApplication {
         name = "restore";
         runtimeInputs = with pkgs; [
-          (callPackage ../pkgs/helium.nix { })
+          helium
           tailscale
           bitwarden-cli
           restic
@@ -13,6 +13,11 @@
           kdePackages.kdialog
           kdePackages.qttools
         ];
+        runtimeEnv = {
+          SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
+          RESTIC_REPOSITORY = config.services.restic.backups.nas.repository;
+          RESTIC_PASSWORD_FILE = config.sops.secrets.restic.path;
+        };
         text = builtins.readFile ./restore.sh;
       };
     in

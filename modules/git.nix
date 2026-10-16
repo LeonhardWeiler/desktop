@@ -1,26 +1,32 @@
 {
-  flake.modules.homeManager.git = {
-    programs.git = {
-      enable = true;
-      settings = {
-        user.email = "leonhard-weiler@hotmail.com";
-        user.name = "Leonhard Weiler";
-        core.editor = "nvim";
-      };
-      signing = {
-        format = "ssh";
-        key = "/home/leo/.ssh/id_ed25519";
-        signByDefault = true;
-        allowedSigners = ''
-          leonhard-weiler@hotmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINq94P7mB2E1HvwZMJnU5aKfVqa79pq5FPPcUltYNnks
-          leonhard-weiler@hotmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOCrqU5a7z7td7FNMwiHHADHG3SzLoWHwKnYOrN5czzB
-          leonhard-weiler@hotmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgP0BFI+h8vNSGDvyaL0CI3ULXr1ZEPZywRK/r79+5s
-        '';
-      };
-      ignores = [
-        "**/.claude/settings.local.json"
-        "*.bak"
+  flake.modules.homeManager.git =
+    { config, pkgs, ... }:
+    {
+      home.packages = [
+        pkgs.gh
+        pkgs.glab
       ];
+      programs.git = {
+        enable = true;
+        settings = {
+          user.email = "leonhard-weiler@hotmail.com";
+          user.name = "Leonhard Weiler";
+          core.editor = "nvim";
+        };
+        signing = {
+          format = "ssh";
+          key = "${config.home.homeDirectory}/.ssh/id_ed25519";
+          signByDefault = true;
+          allowedSigners = ''
+            leonhard-weiler@hotmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINq94P7mB2E1HvwZMJnU5aKfVqa79pq5FPPcUltYNnks
+            leonhard-weiler@hotmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOCrqU5a7z7td7FNMwiHHADHG3SzLoWHwKnYOrN5czzB
+            leonhard-weiler@hotmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgP0BFI+h8vNSGDvyaL0CI3ULXr1ZEPZywRK/r79+5s
+          '';
+        };
+        ignores = [
+          "**/.claude/settings.local.json"
+          "*.bak"
+        ];
+      };
     };
-  };
 }

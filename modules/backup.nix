@@ -1,6 +1,13 @@
+{ config, ... }:
+let
+  inherit (config) user;
+in
 {
   flake.modules.nixos.backup =
     { config, ... }:
+    let
+      home = config.users.users.${user}.home;
+    in
     {
       services.btrbk.instances.home = {
         onCalendar = "hourly";
@@ -16,21 +23,19 @@
       };
 
       services.restic.backups.nas = {
-        repository = "/mnt/nas/leonhard-files/restic/arch";
+        repository = "/mnt/nas/leonhard-files/restic/${config.networking.hostName}";
         passwordFile = config.sops.secrets.restic.path;
         initialize = true;
         paths = [
-          "/home/leo"
+          home
           "/var/lib"
           "/etc/NetworkManager/system-connections"
         ];
         exclude = [
-          "/home/leo/.cache"
-          "/home/leo/.local/share/Steam"
-          "/home/leo/go"
-          "/home/leo/.local/share/go"
-          "/home/leo/.local/share/voxtype/models"
-          "/home/leo/.npm"
+          "${home}/.cache"
+          "${home}/.local/share/Steam"
+          "${home}/.local/share/go"
+          "${home}/.local/share/voxtype/models"
           "**/node_modules"
           "**/target"
           "**/result"
@@ -40,6 +45,7 @@
           Persistent = true;
         };
         pruneOpts = [
+          "--group-by paths"
           "--keep-daily 7"
           "--keep-weekly 8"
           "--keep-monthly 12"

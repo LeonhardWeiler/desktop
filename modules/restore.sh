@@ -17,17 +17,16 @@ bw config server https://nas.taild9564d.ts.net:8443 >/dev/null
 BW_SESSION=$(BW_PASSWORD=$bwpass bw login leonhard-weiler@hotmail.com --passwordenv BW_PASSWORD --raw)
 export BW_SESSION
 umask 077
-mkdir -p ~/.config/sops/age
-bw get password sops-age >~/.config/sops/age/keys.txt
+mkdir -p "$(dirname "$SOPS_AGE_KEY_FILE")"
+bw get password sops-age >"$SOPS_AGE_KEY_FILE"
 bw logout >/dev/null
-until [ -r /run/secrets/restic ]; do
+until [ -r "$RESTIC_PASSWORD_FILE" ]; do
 	sleep 1
 done
 
 SECONDS=0
 read -r bus obj < <(kdialog --title Restore --progressbar "Restoring files from the NAS" 100)
-restic -r /mnt/nas/leonhard-files/restic/arch --password-file /run/secrets/restic \
-	restore latest --target / --include /home/leo --json |
+restic restore latest --target / --include "$HOME" --json |
 	jq --unbuffered -r 'select(.message_type == "status") | .percent_done * 100 | floor' |
 	while read -r p; do
 		qdbus "$bus" "$obj" Set "" value "$p"

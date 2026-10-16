@@ -4,7 +4,6 @@
     {
       programs.btop = {
         enable = true;
-        package = null;
         settings = {
           proc_sorting = "memory";
           net_sync = false;

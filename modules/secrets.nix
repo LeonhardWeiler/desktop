@@ -1,15 +1,19 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
+let
+  inherit (config) user;
+in
 {
   flake.modules.nixos.secrets =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       imports = [ inputs.sops-nix.nixosModules.sops ];
+      environment.systemPackages = [ pkgs.sops ];
       sops = {
         defaultSopsFile = ./secrets.yaml;
-        age.keyFile = "/home/leo/.config/sops/age/keys.txt";
+        age.keyFile = "${config.users.users.${user}.home}/.config/sops/age/keys.txt";
         useSystemdActivation = true;
         secrets = {
-          restic.owner = "leo";
+          restic.owner = user;
           "nas/leonhard-files" = { };
           "nas/shared-files" = { };
           "nas/old-drive" = { };

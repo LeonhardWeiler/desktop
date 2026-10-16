@@ -2,14 +2,14 @@
 
 NixOS config for my Lenovo Legion 5 Pro 16ARH7H: KDE Plasma, btrfs, Colemak DH.
 
-- `modules/`: flake-parts modules, loaded by import-tree. Each file adds features to `flake.modules.nixos` and `flake.modules.homeManager`; `arch.nix` builds the host from all of them, `home.nix` hands the home modules to home-manager with plasma-manager.
+- `modules/`: flake-parts modules, loaded by import-tree. Each file adds features to `flake.modules.nixos` and `flake.modules.homeManager`; `legion.nix` builds the host from all of them, `home.nix` hands the home modules to home-manager with plasma-manager.
 - `modules/disko.nix`: btrfs with subvolumes `root`, `home`, `nix`, `snapshots`.
 - `modules/mixxx/skin/`: recolors the LateNight skin, built into the Nix store.
-- `pkgs/`: Helium and eitype, which nixpkgs does not have.
 
 ```sh
-sudo nixos-rebuild switch --flake ~/files/repos/desktop#arch
+sudo nixos-rebuild switch --flake ~/files/repos/desktop
 nix flake update   # then rebuild
+nix fmt
 ```
 
 ## Secrets
@@ -21,15 +21,15 @@ The secrets are decrypted to `/run/secrets` at boot and as soon as the key exist
 
 ## Install
 
-Before: remove the old `arch` machine in the [Tailscale admin console](https://login.tailscale.com/admin/machines).
+Before: remove the old `legion` machine in the [Tailscale admin console](https://login.tailscale.com/admin/machines).
 
 1. Plug the stick directly into the laptop, power on, press F12 and pick the stick.
    If it does not boot, turn off Secure Boot in the BIOS (F2).
 2. In the live system connect to WiFi in the panel. The keyboard is US QWERTY there. Open Konsole:
    ```sh
    sudo nix --experimental-features 'nix-command flakes' run github:nix-community/disko/latest -- \
-     --mode destroy,format,mount --flake github:LeonhardWeiler/desktop#arch
-   sudo nixos-install --no-root-passwd --flake github:LeonhardWeiler/desktop#arch
+     --mode destroy,format,mount --flake github:LeonhardWeiler/desktop#legion
+   sudo nixos-install --no-root-passwd --flake github:LeonhardWeiler/desktop#legion
    sudo nixos-enter --root /mnt -c 'passwd leo'
    reboot
    ```
@@ -47,7 +47,7 @@ Before: remove the old `arch` machine in the [Tailscale admin console](https://l
 ## Backups
 
 - Hourly btrfs snapshots of `/home` in `/mnt/btrfs/snapshots`. Restore a file with `cp`.
-- Daily restic of `~`, `/var/lib` and the WiFi connections to the NAS (`/mnt/nas/leonhard-files/restic/arch`):
+- Daily restic of `~`, `/var/lib` and the WiFi connections to the NAS (`/mnt/nas/leonhard-files/restic/legion`):
   `sudo restic-nas snapshots`, `sudo restic-nas restore latest --target /tmp/restore`.
   After a reinstall, bring back WiFi and Bluetooth with
   `sudo restic-nas restore latest --target / --include /var/lib/bluetooth --include /etc/NetworkManager/system-connections`.

@@ -8,6 +8,10 @@
       '';
     in
     {
+      home.packages = [
+        pkgs.mixxx
+        pkgs.qt6Packages.qt6ct
+      ];
       home.file.".mixxx/Custom.kbd.cfg".source = ./mixxx/Custom.kbd.cfg;
       home.file.".mixxx/soundconfig.xml".source = ./mixxx/soundconfig.xml;
       home.file.".mixxx/skins".source = "${skin}/skins";

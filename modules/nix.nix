@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   flake.modules.nixos.nix = {
     system.stateVersion = "26.11";
@@ -8,7 +9,7 @@
         "flakes"
       ];
       auto-optimise-store = true;
-      trusted-users = [ "leo" ];
+      trusted-users = [ config.user ];
     };
     nix.gc = {
       automatic = true;

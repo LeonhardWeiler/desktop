@@ -22,7 +22,7 @@
         shellAliases = {
           open = "xdg-open";
           dot = "cd $HOME/files/repos/desktop";
-          rebuild = "sudo nixos-rebuild switch --flake $HOME/files/repos/desktop#arch";
+          rebuild = "sudo nixos-rebuild switch --flake $HOME/files/repos/desktop";
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
           todo = "nvim ./AGENT/TODO.md";
@@ -30,7 +30,6 @@
           camera = "ffplay -f v4l2 /dev/video0 -vf hflip -x 1280 -y 720";
           screenshot = "spectacle --region";
         };
-        profileExtra = ''[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env"'';
         initExtra = ''
           BAT_CAPACITY=
           for _bat in /sys/class/power_supply/*; do

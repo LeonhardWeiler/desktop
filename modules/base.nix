@@ -1,6 +1,11 @@
+{ config, lib, ... }:
 {
-  flake.modules.nixos.base = {
-    networking.hostName = "arch";
+  options.user = lib.mkOption { type = lib.types.str; };
+
+  config.user = "leo";
+
+  config.flake.modules.nixos.base = {
+    networking.hostName = "legion";
     time.timeZone = "Europe/Vienna";
     i18n.defaultLocale = "en_US.UTF-8";
     console.keyMap = "mod-dh-iso-uk";
@@ -12,9 +17,9 @@
     networking.networkmanager.enable = true;
     networking.modemmanager.enable = false;
     services.tailscale.enable = true;
-    services.tailscale.extraSetFlags = [ "--operator=leo" ];
+    services.tailscale.extraSetFlags = [ "--operator=${config.user}" ];
 
-    users.users.leo = {
+    users.users.${config.user} = {
       isNormalUser = true;
       description = "Leonhard Weiler";
       extraGroups = [
