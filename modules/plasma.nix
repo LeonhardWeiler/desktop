@@ -88,6 +88,7 @@ in
               {
                 iconTasks = {
                   launchers = [
+                    "applications:signal.desktop"
                     "applications:com.mitchellh.ghostty.desktop"
                     "applications:t3code.desktop"
                     "applications:helium.desktop"
