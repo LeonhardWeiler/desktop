@@ -16,10 +16,7 @@
           figma-agent
           ghostty
           obs-studio
-          gcc
-          gnumake
           typst
-          uv
           nodejs
           jq
           rsync
