@@ -40,6 +40,19 @@
           };
       };
 
+      xdg.configFile."autostart/bitwarden.desktop" = {
+        force = true;
+        text = lib.generators.toINI { } {
+          "Desktop Entry" = {
+            Type = "Application";
+            Name = "Bitwarden";
+            Exec = "bitwarden --autostart";
+            StartupNotify = false;
+            Terminal = false;
+          };
+        };
+      };
+
       home.packages = [ pkgs.t3code ];
       xdg.dataFile."applications/t3code.desktop".text = lib.generators.toINI { } {
         "Desktop Entry" = {
