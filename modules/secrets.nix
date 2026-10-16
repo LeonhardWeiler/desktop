@@ -8,9 +8,11 @@ in
     {
       imports = [ inputs.sops-nix.nixosModules.sops ];
       environment.systemPackages = [ pkgs.sops ];
+      environment.variables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
+      security.sudo.extraConfig = "Defaults env_keep += SOPS_AGE_KEY_FILE";
       sops = {
         defaultSopsFile = ./secrets.yaml;
-        age.keyFile = "${config.users.users.${user}.home}/.config/sops/age/keys.txt";
+        age.keyFile = "/var/lib/sops-nix/key.txt";
         useSystemdActivation = true;
         secrets = {
           restic.owner = user;

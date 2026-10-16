@@ -11,7 +11,7 @@ update     # update inputs, rebuild, commit and push flake.lock
 nix fmt    # format
 ```
 
-Secrets live in `modules/secrets.yaml`, edit with `sops modules/secrets.yaml`.
+Secrets live in `modules/secrets.yaml`, edit with `sudo sops modules/secrets.yaml`.
 The age key is in Bitwarden as `sops-age`.
 
 ## Install

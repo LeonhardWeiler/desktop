@@ -19,8 +19,9 @@ bw config server "https://$NAS:8443" >/dev/null
 BW_SESSION=$(BW_PASSWORD=$bwpass bw login "$EMAIL" --passwordenv BW_PASSWORD --raw)
 export BW_SESSION
 umask 077
-mkdir -p "$(dirname "$SOPS_AGE_KEY_FILE")"
-bw get password sops-age >"$SOPS_AGE_KEY_FILE"
+bw get password sops-age >"$tmp/age"
+sudo -S -p '' install -D -m 600 "$tmp/age" "$SOPS_AGE_KEY_FILE" <<<"$pass"
+rm "$tmp/age"
 bw logout >/dev/null
 SECONDS=0
 until [ -r "$RESTIC_PASSWORD_FILE" ]; do
