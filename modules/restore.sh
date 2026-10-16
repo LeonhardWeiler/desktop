@@ -17,16 +17,16 @@ bw config server https://nas.taild9564d.ts.net:8443 >/dev/null
 BW_SESSION=$(BW_PASSWORD=$bwpass bw login leonhard-weiler@hotmail.com --passwordenv BW_PASSWORD --raw)
 export BW_SESSION
 umask 077
-mkdir -p ~/.config/restic ~/.config/nas
-bw get password restic >~/.config/restic/password
+mkdir -p ~/.config/sops/age
+bw get password sops-age >~/.config/sops/age/keys.txt
 bw logout >/dev/null
-
-naspass=$(kdialog --title NAS --password "NAS password for leonhard")
-printf 'username=leonhard\npassword=%s\n' "$naspass" >~/.config/nas/leonhard-files
+until [ -r /run/secrets/restic ]; do
+	sleep 1
+done
 
 SECONDS=0
 read -r bus obj < <(kdialog --title Restore --progressbar "Restoring files from the NAS" 100)
-restic -r /mnt/nas/leonhard-files/restic/arch --password-file ~/.config/restic/password \
+restic -r /mnt/nas/leonhard-files/restic/arch --password-file /run/secrets/restic \
 	restore latest --target / --include /home/leo --json |
 	jq --unbuffered -r 'select(.message_type == "status") | .percent_done * 100 | floor' |
 	while read -r p; do

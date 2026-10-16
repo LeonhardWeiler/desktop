@@ -49,6 +49,7 @@
           jq
           btop
           restic
+          sops
           rsync
           wget
           zip

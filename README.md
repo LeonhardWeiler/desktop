@@ -14,11 +14,10 @@ nix flake update   # then rebuild
 
 ## Secrets
 
-Not in the repo. They live in `~` and come back with the restore:
-
-- `~/.config/nas/<share>`: `username=…` and `password=…`
-- `~/.config/restic/password`, also in Bitwarden as item `restic`
-- `~/.ssh`
+`modules/secrets.yaml` is encrypted with sops for the age key in `~/.config/sops/age/keys.txt`,
+also in Bitwarden as item `sops-age`. Edit with `sops modules/secrets.yaml`.
+The secrets are decrypted to `/run/secrets` at boot and as soon as the key exists.
+`~/.ssh` comes back with the restore.
 
 ## Install
 
@@ -38,7 +37,6 @@ Before: remove the old `arch` machine in the [Tailscale admin console](https://l
    `passwd` sets the login password and already uses Colemak DH. Pull the stick when the screen goes black.
 3. Log in as `leo` and connect to WiFi. `restore` starts on its own:
    - asks for the Bitwarden master password while Helium opens the Tailscale login,
-   - asks for the NAS password of `leonhard`,
    - restores `~` from the latest restic snapshot with a progress bar and reboots.
 
    It runs on every login until `~/files/repos/desktop` exists.
