@@ -16,7 +16,6 @@
           hls-bitrate = "max";
           scale = "catmull_rom";
           cscale = "catmull_rom";
-          input-ipc-server = "/tmp/mpvsocket";
           window-dragging = false;
           ignore-path-in-watch-later-config = true;
           prefetch-playlist = true;
@@ -45,8 +44,8 @@
           cache = true;
           demuxer-seekable-cache = true;
           demuxer-readahead-secs = 300;
-          demuxer-max-bytes = "4000M";
-          demuxer-max-back-bytes = "4000M";
+          demuxer-max-bytes = "500M";
+          demuxer-max-back-bytes = "250M";
         };
         bindings = {
           h = "seek -5";
