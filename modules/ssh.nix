@@ -1,8 +1,18 @@
 {
   flake.modules.nixos.ssh.programs.ssh.knownHosts = {
     nas = {
-      hostNames = [ "100.65.0.90" ];
+      hostNames = [
+        "nas"
+        "100.65.0.90"
+      ];
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII2UYM1qDrRKft+G6VBhxMeyrmw3vskRFUj5F+l88c1O";
+    };
+    server = {
+      hostNames = [
+        "server"
+        "100.125.41.118"
+      ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICBHjLsTqAyKteTSPF+Ws5noHMTGfIdOdz4f4OI4jq+s";
     };
     github = {
       hostNames = [ "github.com" ];
