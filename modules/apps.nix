@@ -6,20 +6,14 @@
         enable = true;
         associations.added = {
           "text/markdown" = [
-            "dev.zed.Zed.desktop"
             "okularApplication_md.desktop"
             "okularApplication_txt.desktop"
             "nvim.desktop"
           ];
           "text/vnd.typst" = [
-            "dev.zed.Zed.desktop"
             "nvim.desktop"
             "okularApplication_txt.desktop"
           ];
-          "video/mp4" = [
-            "mpv.desktop"
-          ];
-          "x-scheme-handler/bitwarden" = "bitwarden.desktop";
         };
         defaultApplications =
           lib.genAttrs [
