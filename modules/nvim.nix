@@ -42,14 +42,13 @@
           writebackup = false;
           swapfile = false;
           undofile = true;
+          exrc = true;
         };
 
-        extraFiles."lua/blog.lua".source = ./nvim/blog.lua;
         extraConfigLua = ''
           vim.opt.shortmess:append("c")
           vim.opt.isfname:append("@-@")
           vim.cmd("packadd nvim.tohtml")
-          require("blog")
           ${builtins.readFile ./nvim/autocapitalize.lua}
         '';
 
