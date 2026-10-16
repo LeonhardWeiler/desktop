@@ -8,7 +8,6 @@
         "nix-command"
         "flakes"
       ];
-      auto-optimise-store = true;
       trusted-users = [ config.user ];
     };
     nix.gc = {
@@ -17,6 +16,7 @@
       options = "--delete-older-than 30d";
     };
     nix.channel.enable = false;
+    nix.optimise.automatic = true;
     documentation.nixos.enable = false;
     programs.nix-ld.enable = true;
   };
