@@ -15,7 +15,7 @@
 
 - No comments by default. A comment only carries what the code cannot, e.g. something that is weirdly done only in this project and would CONFUSE others.
 - Never explain why an option was chosen. State the thing and stop.
-- Keep docs, READMEs and CLAUDE.md files short.
+- Keep docs, READMEs and CLAUDE.md files short and docs as well as READMEs easy to understand and parse for humans, the AGENT files can be more convoluted and more detailed with the goal to provide the minimum information needed to perform the tasks as wished.
 
 ## Workflow
 
@@ -23,8 +23,7 @@
 - Commit after each step. Push at the end of the workflow.
 - Provide toolchains and dependencies through a `flake.nix`, not system-wide installs.
 - Before each commit run the fast checks (typecheck, lint, unit tests) and the slow tests the change affects; run the full suite before the push.
-- `AGENT/` holds `TODO.md` and `project-health-report.html`, maintained by the
-  skills `implement-todo` and `review-and-update-report`. It is not part of the product.
+- `AGENT/` holds `TODO.md` and `project-health-report.html`, maintained by the skills `implement-todo` and `review-and-update-report`. It is not part of the product.
 
 ## Language
 
@@ -40,7 +39,7 @@
 
 - Commit subject: lowercase `area: what it does`.
 - Use my git config as is (name, email, signing). Never change author or skip signing.
-- Do not add "Authored by" or "Signed-off-by" lines to commit messages in school projects.
+- Do not add "Authored by" or "Signed-off-by" lines to commit messages in school projects (files/school).
 
 ## System
 
