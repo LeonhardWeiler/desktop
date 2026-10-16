@@ -28,15 +28,13 @@ The age key is in Bitwarden as `sops-age`.
 
 ### From another machine with nixos-anywhere
 
-Needs Nix with flakes on the other machine.
+The other machine needs Nix and must reach the laptop over SSH, e.g. in the same WiFi.
 
-1. Boot the laptop from the minimal NixOS ISO, connect with `nmtui`, run `passwd` and note the IP from `ip a`.
-2. On the other machine:
+1. Boot the laptop from the minimal NixOS ISO, connect with `nmtui`.
+   Run `passwd` to allow SSH logins and note the IP from `ip a`.
+2. On the other machine run this, enter the IP and the `passwd` password, then the password for `leo`:
    ```sh
-   git clone https://github.com/LeonhardWeiler/desktop && cd desktop
-   nix run github:nix-community/nixos-anywhere -- --flake .#legion \
-     --phases disko,install --target-host nixos@<ip>
-   ssh -t nixos@<ip> "sudo nixos-enter --root /mnt -c 'passwd leo' && sudo reboot"
+   bash <(curl -L https://raw.githubusercontent.com/LeonhardWeiler/desktop/main/anywhere.sh)
    ```
 3. Continue with step 4 above.
 
