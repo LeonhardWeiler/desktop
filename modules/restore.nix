@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  inherit (config) repo;
+  inherit (config) repo nas;
 in
 {
   flake.modules.nixos.restore =
@@ -19,6 +19,7 @@ in
         ];
         runtimeEnv = {
           REPO = repo;
+          NAS = nas;
           SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
           RESTIC_REPOSITORY = config.services.restic.backups.nas.repository;
           RESTIC_PASSWORD_FILE = config.sops.secrets.restic.path;

@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  inherit (config) user;
+  inherit (config) user nas;
 in
 {
   flake.modules.nixos.nas =
@@ -29,7 +29,7 @@ in
         map (s: {
           name = "/mnt/nas/${s}";
           value = {
-            device = "//nas.taild9564d.ts.net/${s}";
+            device = "//${nas}/${s}";
             fsType = "cifs";
             options = [
               "noauto"
