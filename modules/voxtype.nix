@@ -8,6 +8,7 @@
     }:
     let
       toml = pkgs.formats.toml { };
+      model = "large-v3-turbo";
       eitype = pkgs.rustPlatform.buildRustPackage rec {
         pname = "eitype";
         version = "0.2.2";
@@ -25,38 +26,43 @@
     in
     {
       home.packages = [
-        (pkgs.voxtype.override { vulkanSupport = true; })
         eitype
         pkgs.quickshell
       ];
-      xdg.configFile."voxtype/config.toml".source = toml.generate "config.toml" {
-        hotkey.enabled = false;
-        audio = {
-          max_duration_secs = 300;
-          feedback = {
-            enabled = true;
-            theme = "subtle";
-            volume = 0.5;
+      services.voxtype = {
+        enable = true;
+        package = pkgs.voxtype.override { vulkanSupport = true; };
+        loadModels = [ model ];
+        environment.PATH = "/etc/profiles/per-user/%u/bin:/run/current-system/sw/bin";
+        settings = {
+          hotkey.enabled = false;
+          audio = {
+            max_duration_secs = 300;
+            feedback = {
+              enabled = true;
+              theme = "subtle";
+              volume = 0.5;
+            };
           };
-        };
-        whisper = {
-          model = "large-v3-turbo";
-          language = "de";
-        };
-        output = {
-          driver_order = [
-            "eitype"
-            "clipboard"
-          ];
-          eitype_xkb_layout = osConfig.services.xserver.xkb.layout;
-          eitype_xkb_variant = osConfig.services.xserver.xkb.variant;
-          type_delay_ms = 2;
-        };
-        osd = {
-          frontend = "quickshell";
-          style = "handy";
-          width_px = 180;
-          top_margin = 0.9;
+          whisper = {
+            inherit model;
+            language = "de";
+          };
+          output = {
+            driver_order = [
+              "eitype"
+              "clipboard"
+            ];
+            eitype_xkb_layout = osConfig.services.xserver.xkb.layout;
+            eitype_xkb_variant = osConfig.services.xserver.xkb.variant;
+            type_delay_ms = 2;
+          };
+          osd = {
+            frontend = "quickshell";
+            style = "handy";
+            width_px = 180;
+            top_margin = 0.9;
+          };
         };
       };
 
@@ -100,18 +106,6 @@
             radius = 3;
           }
         ];
-      };
-
-      xdg.configFile."autostart/voxtype.desktop".text = lib.generators.toINI { } {
-        "Desktop Entry" = {
-          Type = "Application";
-          Name = "voxtype";
-          Comment = "Dictation daemon (voice to text)";
-          Exec = "voxtype daemon";
-          Terminal = false;
-          X-GNOME-Autostart-enabled = true;
-          OnlyShowIn = "KDE;";
-        };
       };
 
       programs.plasma.shortcuts."services/voxtype-toggle.desktop"._launch = "Meta+Space";
