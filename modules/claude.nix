@@ -18,6 +18,7 @@
         promptSuggestionEnabled = false;
         skipDangerousModePermissionPrompt = true;
         theme = "dark";
+        env.DISABLE_AUTOUPDATER = "1";
         fileCheckpointingEnabled = false;
         remoteControlAtStartup = false;
         inputNeededNotifEnabled = true;

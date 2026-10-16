@@ -1,9 +1,21 @@
 {
   flake.modules.homeManager.mixxx =
-    { lib, ... }:
+    { lib, pkgs, ... }:
+    let
+      skin = pkgs.runCommand "mixxx-skin" { nativeBuildInputs = [ pkgs.ffmpeg-headless ]; } ''
+        MIXXX_SKIN_DIR=${pkgs.mixxx}/share/mixxx/skins MIXXX_SETTINGS_DIR=$out XDG_CONFIG_HOME=$out \
+          sh ${./mixxx/skin}/build-skin
+      '';
+    in
     {
       home.file.".mixxx/Custom.kbd.cfg".source = ./mixxx/Custom.kbd.cfg;
       home.file.".mixxx/soundconfig.xml".source = ./mixxx/soundconfig.xml;
+      home.file.".mixxx/skins".source = "${skin}/skins";
+      home.file.".mixxx/prefs.qss".source = "${skin}/prefs.qss";
+      xdg.configFile.qt6ct.source = "${skin}/qt6ct";
+      home.activation.mixxxSkin = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        [ -e ~/.mixxx/mixxx.cfg ] || printf "[Config]\nResizableSkin LateNight-Leo\nScheme Leo\n" >~/.mixxx/mixxx.cfg
+      '';
       xdg.dataFile."applications/org.mixxx.Mixxx.desktop".text = lib.generators.toINI { } {
         "Desktop Entry" = {
           Version = "1.0";

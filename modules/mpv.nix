@@ -36,7 +36,6 @@
     {
       programs.mpv = {
         enable = true;
-        package = null;
         config = {
           profile = "gpu-hq";
           hls-bitrate = "max";
