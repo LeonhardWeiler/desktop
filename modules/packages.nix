@@ -24,7 +24,6 @@
           (callPackage ../pkgs/eitype.nix { })
           (voxtype.override { vulkanSupport = true; })
           t3code
-          claude-code
           bitwarden-desktop
           signal-desktop
           teams-for-linux

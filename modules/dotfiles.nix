@@ -1,50 +1,7 @@
 {
   flake.modules.nixos.dotfiles = {
-    systemd.user.tmpfiles.users.leo.rules =
-      map (p: "L+ %h/${p} - - - - /home/leo/files/repos/desktop/home/${p}")
-        [
-          ".bashrc"
-          ".bash_profile"
-          ".config/nvim"
-          ".config/mpv"
-          ".config/git"
-          ".config/pip"
-          ".config/btop/btop.conf"
-          ".config/voxtype/config.toml"
-          ".config/voxtype/osd/handy"
-          ".config/mimeapps.list"
-          ".config/environment.d/10-desktop.conf"
-          ".config/autostart/clipboard_sanitize.desktop"
-          ".config/autostart/voxtype.desktop"
-          ".config/powerdevilrc"
-          ".config/kscreenlockerrc"
-          ".config/kxkbrc"
-          ".config/baloofilerc"
-          ".config/dolphinrc"
-          ".config/kdeglobals"
-          ".config/kdedefaults"
-          ".config/kwinrc"
-          ".config/kglobalshortcutsrc"
-          ".config/kactivitymanagerdrc"
-          ".config/plasmashellrc"
-          ".config/plasma-org.kde.plasma.desktop-appletsrc"
-          ".config/gtk-3.0/settings.ini"
-          ".config/gtk-4.0/settings.ini"
-          ".config/pipewire/pipewire.conf.d/99-custom.conf"
-          ".config/pipewire/pipewire.conf.d/10-eq.conf"
-          ".config/pipewire/jack.conf.d/20-dj-jack.conf"
-          ".local/bin/sanitize"
-          ".local/bin/clipboard_sanitize"
-          ".local/share/applications/voxtype-toggle.desktop"
-          ".local/share/applications/org.mixxx.Mixxx.desktop"
-          ".local/share/applications/t3code.desktop"
-          ".local/share/wallpapers"
-          ".mixxx/Custom.kbd.cfg"
-          ".mixxx/soundconfig.xml"
-          ".claude/CLAUDE.md"
-          ".claude/settings.json"
-          ".claude/skills/implement-todo"
-          ".claude/skills/review-and-update-report"
-        ];
+    systemd.user.tmpfiles.users.leo.rules = [
+      "L+ %h/.config/nvim - - - - /home/leo/files/repos/desktop/home/.config/nvim"
+    ];
   };
 }
