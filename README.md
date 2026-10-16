@@ -34,7 +34,7 @@ The other machine must reach the laptop over SSH, e.g. in the same WiFi, and nee
 
 1. Boot any Linux on the laptop, e.g. the minimal NixOS ISO, and connect to the internet.
    Make sure SSH login works (on the NixOS ISO run `passwd`) and note the IP from `ip a`.
-2. On the other machine run this, enter `user@ip` and the SSH password, then the password for `leo`:
+2. On the other machine run this, enter `user@ip` and that user's password, then set the password for `leo`:
    ```sh
    bash <(curl -L coprime.tech/legion-anywhere)
    ```
