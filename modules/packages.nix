@@ -38,7 +38,6 @@
           audacity
           mixxx
           lsp-plugins
-          neovim
           gcc
           gnumake
           git

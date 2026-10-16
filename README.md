@@ -4,7 +4,7 @@ NixOS config for my Lenovo Legion 5 Pro 16ARH7H: KDE Plasma, btrfs, Colemak DH.
 
 - `modules/`: flake-parts modules, loaded by import-tree. Each file adds features to `flake.modules.nixos` and `flake.modules.homeManager`; `arch.nix` builds the host from all of them, `home.nix` hands the home modules to home-manager with plasma-manager.
 - `modules/disko.nix`: btrfs with subvolumes `root`, `home`, `nix`, `snapshots`.
-- `home/`: dotfiles not yet in Nix. Each path in `modules/dotfiles.nix` is symlinked into `~`.
+- `home/`: old dotfiles, no longer linked. Removed after the switch.
 - `pkgs/`: Helium and eitype, which nixpkgs does not have.
 
 ```sh
