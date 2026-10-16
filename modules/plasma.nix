@@ -99,6 +99,7 @@ in
           });
       programs.plasma = {
         enable = true;
+        overrideConfig = true;
         workspace = {
           lookAndFeel = "org.kde.breezedark.desktop";
           inherit wallpaper;
@@ -182,6 +183,7 @@ in
             };
           };
           baloofilerc."Basic Settings".Indexing-Enabled = false;
+          kwalletrc.Wallet."First Use" = false;
           krunnerrc.Plugins.baloosearchEnabled = false;
           powerdevilrc = lib.genAttrs [ "AC/Display" "Battery/Display" "LowBattery/Display" ] (_: {
             TurnOffDisplayWhenIdle = false;
