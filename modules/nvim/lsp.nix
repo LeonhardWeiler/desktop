@@ -52,10 +52,6 @@
                 lspBufAction = "references";
               }
               {
-                key = "K";
-                lspBufAction = "hover";
-              }
-              {
                 key = "<leader>r";
                 lspBufAction = "rename";
               }
@@ -66,14 +62,6 @@
               {
                 key = "<leader>d";
                 action = lib.nixvim.mkRaw "vim.diagnostic.open_float";
-              }
-              {
-                key = "[d";
-                action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count = -1 }) end";
-              }
-              {
-                key = "]d";
-                action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count = 1 }) end";
               }
             ];
       };

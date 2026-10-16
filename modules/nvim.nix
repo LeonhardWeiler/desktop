@@ -27,26 +27,18 @@
           softtabstop = 2;
           shiftwidth = 2;
           expandtab = true;
-          autoindent = true;
           smartindent = true;
           clipboard = "unnamedplus";
           hlsearch = false;
-          incsearch = true;
           ignorecase = true;
           scrolloff = 10;
           signcolumn = "yes";
-          backspace = [
-            "indent"
-            "eol"
-            "start"
-          ];
           nrformats = [
             "bin"
             "hex"
             "alpha"
           ];
           updatetime = 50;
-          backup = false;
           writebackup = false;
           swapfile = false;
           undofile = true;
@@ -93,8 +85,6 @@
             pattern = [
               "markdown"
               "text"
-              "txt"
-              "md"
             ];
             callback = lib.nixvim.mkRaw ''
               function(args)

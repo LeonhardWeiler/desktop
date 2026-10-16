@@ -129,66 +129,12 @@
             prompt_save_on_select_new_entry = true;
             skip_confirm_for_simple_edits = true;
             watch_for_changes = true;
-            keymaps = {
-              "g?" = {
-                __unkeyed-1 = "actions.show_help";
-                mode = "n";
-              };
-              "<CR>" = "actions.select";
-              "<C-s>" = {
-                __unkeyed-1 = "actions.select";
-                opts.vertical = true;
-              };
-              "<C-h>" = {
-                __unkeyed-1 = "actions.select";
-                opts.horizontal = true;
-              };
-              "<C-t>" = {
-                __unkeyed-1 = "actions.select";
-                opts.tab = true;
-              };
-              "<C-p>" = "actions.preview";
-              "<C-c>" = {
-                __unkeyed-1 = "actions.close";
-                mode = "n";
-              };
-              "<C-l>" = "actions.refresh";
-              "-" = {
-                __unkeyed-1 = "actions.parent";
-                mode = "n";
-              };
-              "_" = {
-                __unkeyed-1 = "actions.open_cwd";
-                mode = "n";
-              };
-              "`" = {
-                __unkeyed-1 = "actions.cd";
-                mode = "n";
-              };
-              "~" = {
-                __unkeyed-1 = "actions.cd";
-                opts.scope = "tab";
-                mode = "n";
-              };
-              "gs" = {
-                __unkeyed-1 = "actions.change_sort";
-                mode = "n";
-              };
-              "gx" = "actions.open_external";
-              "g." = {
-                __unkeyed-1 = "actions.toggle_hidden";
-                mode = "n";
-              };
-              "g\\" = {
-                __unkeyed-1 = "actions.toggle_trash";
-                mode = "n";
-              };
+            keymaps."~" = {
+              __unkeyed-1 = "actions.cd";
+              opts.scope = "tab";
+              mode = "n";
             };
-            view_options = {
-              show_hidden = true;
-              is_hidden_file = lib.nixvim.mkRaw ''function(name, _) return name:match("^%.") ~= nil end'';
-              is_always_hidden = lib.nixvim.mkRaw "function(_, _) return false end";
-            };
+            view_options.show_hidden = true;
           };
         };
 
@@ -196,25 +142,10 @@
           enable = true;
           settings = {
             options = {
-              theme = "auto";
-              icons_enabled = true;
               section_separators = "";
               component_separators = "";
-              always_divide_middle = true;
-              globalstatus = false;
-              refresh = {
-                statusline = 1000;
-                tabline = 1000;
-                winbar = 1000;
-              };
             };
             sections = {
-              lualine_a = [ "mode" ];
-              lualine_b = [
-                "branch"
-                "diff"
-                "diagnostics"
-              ];
               lualine_c = [
                 {
                   __unkeyed-1 = "filename";
@@ -234,7 +165,6 @@
                 "fileformat"
               ];
               lualine_y = [ "filetype" ];
-              lualine_z = [ "location" ];
             };
           };
         };
