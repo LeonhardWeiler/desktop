@@ -36,7 +36,7 @@ in
           action = "sleep";
           idleTimeout = 1800;
         };
-        whenLaptopLidClosed = "doNothing";
+        whenLaptopLidClosed = "sleep";
         dimDisplay = {
           enable = true;
           idleTimeout = 600;
@@ -104,8 +104,9 @@ in
           inherit wallpaper;
         };
         kscreenlocker = {
-          autoLock = false;
-          lockOnResume = false;
+          autoLock = true;
+          timeout = 20;
+          lockOnResume = true;
           appearance.wallpaper = wallpaper;
         };
         powerdevil = {
