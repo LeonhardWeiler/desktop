@@ -1,11 +1,22 @@
+{ config, ... }:
 {
   flake.modules.nixos.ssh.programs.ssh = {
     startAgent = true;
     enableAskPassword = true;
-    extraConfig = "AddKeysToAgent yes";
+    extraConfig = ''
+      Host nas ${config.nas}
+        IdentityFile ~/.ssh/nas
+        IdentitiesOnly yes
+        AddKeysToAgent confirm
+      Host *
+        AddKeysToAgent yes
+    '';
     knownHosts = {
       nas = {
-        hostNames = [ "nas" ];
+        hostNames = [
+          "nas"
+          config.nas
+        ];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII2UYM1qDrRKft+G6VBhxMeyrmw3vskRFUj5F+l88c1O";
       };
       server = {
