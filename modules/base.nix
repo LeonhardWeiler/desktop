@@ -9,7 +9,6 @@
   config.nas = "nas.taild9564d.ts.net";
 
   config.flake.modules.nixos.base = {
-    networking.hostName = "legion";
     time.timeZone = "Europe/Vienna";
     i18n.defaultLocale = "en_US.UTF-8";
     console.keyMap = "mod-dh-iso-uk";
