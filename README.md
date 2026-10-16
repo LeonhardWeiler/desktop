@@ -34,7 +34,7 @@ The other machine needs Nix and must reach the laptop over SSH, e.g. in the same
    Run `passwd` to allow SSH logins and note the IP from `ip a`.
 2. On the other machine run this, enter the IP and the `passwd` password, then the password for `leo`:
    ```sh
-   bash <(curl -L https://raw.githubusercontent.com/LeonhardWeiler/desktop/main/anywhere.sh)
+   bash <(curl -L coprime.tech/legion-anywhere)
    ```
 3. Continue with step 4 above.
 
