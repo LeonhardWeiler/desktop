@@ -22,6 +22,7 @@ in
         };
       };
 
+      systemd.services.restic-backups-nas.unitConfig.RequiresMountsFor = "/mnt/nas/leonhard-files";
       services.restic.backups.nas = {
         repository = "/mnt/nas/leonhard-files/restic/${config.networking.hostName}";
         passwordFile = config.sops.secrets.restic.path;
