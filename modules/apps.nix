@@ -33,10 +33,9 @@
             "text/markdown" = "dev.zed.Zed.desktop";
             "text/vnd.typst" = "dev.zed.Zed.desktop";
             "video/mp4" = "mpv.desktop";
-            "x-scheme-handler/claude-cli" = "claude-code-url-handler.desktop";
             "x-scheme-handler/sgnl" = "signal.desktop";
             "x-scheme-handler/signalcaptcha" = "signal.desktop";
-            "x-scheme-handler/t3code" = "com.t3tools.T3Code.desktop";
+            "x-scheme-handler/t3code" = "t3code.desktop";
             "x-scheme-handler/bitwarden" = "bitwarden.desktop";
           };
       };
@@ -53,6 +52,7 @@
           Terminal = false;
           Type = "Application";
           Version = "1.5";
+          MimeType = "x-scheme-handler/t3code;";
         };
       };
     };
