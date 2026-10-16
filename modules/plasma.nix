@@ -1,4 +1,15 @@
+let
+  wallpaper = builtins.path {
+    path = ./plasma/monterey-dark.jpg;
+    name = "monterey-dark.jpg";
+  };
+in
 {
+  flake.modules.nixos.plasma.environment.etc."plasmalogin.conf.d/50-wallpaper.conf".text = ''
+    [Greeter][Wallpaper][org.kde.image][General]
+    Image=file://${wallpaper}
+  '';
+
   flake.modules.homeManager.plasma =
     {
       config,
@@ -7,10 +18,6 @@
       ...
     }:
     let
-      wallpaper = builtins.path {
-        path = ./plasma/monterey-dark.jpg;
-        name = "monterey-dark.jpg";
-      };
       desktop = "d84a00b2-e864-40e5-8264-7ee48d189e5a";
       tiling = {
         padding = 4;
