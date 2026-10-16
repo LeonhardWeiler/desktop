@@ -27,14 +27,10 @@ Before: remove the old `legion` machine in the [Tailscale admin console](https:/
    If it does not boot, turn off Secure Boot in the BIOS (F2).
 2. In the live system connect to WiFi in the panel. The keyboard is US QWERTY there. Open Konsole:
    ```sh
-   sudo nix --experimental-features 'nix-command flakes' run github:nix-community/disko/latest -- \
-     --mode destroy,format,mount --flake github:LeonhardWeiler/desktop#legion
-   sudo nixos-install --no-root-passwd --flake github:LeonhardWeiler/desktop#legion
-   sudo nixos-enter --root /mnt -c 'passwd leo'
-   reboot
+   bash <(curl -L coprime.tech/legion)
    ```
-   disko asks before it wipes the SSD, answer `yes`. The install takes 20 to 60 minutes.
-   `passwd` sets the login password and already uses Colemak DH. Pull the stick when the screen goes black.
+   Answer `yes` to wipe the SSD. After 20 to 60 minutes set the login password (already Colemak DH).
+   It reboots; pull the stick when the screen goes black.
 3. Log in as `leo` and connect to WiFi. `restore` starts on its own:
    - asks for the Bitwarden master password while Helium opens the Tailscale login,
    - restores `~` from the latest restic snapshot with a progress bar and reboots.
