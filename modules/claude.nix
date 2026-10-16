@@ -9,6 +9,12 @@
         permissions = {
           defaultMode = "auto";
           additionalDirectories = [ "/" ];
+          deny = map (p: "Read(${p})") [
+            "~/.ssh/id_*"
+            "~/.config/sops/**"
+            "//run/secrets/**"
+            "//run/secrets.d/**"
+          ];
         };
         model = "opus";
         disableClaudeAiConnectors = true;
