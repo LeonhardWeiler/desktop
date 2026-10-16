@@ -44,6 +44,6 @@
 
 ## System
 
-- Arch Linux with KDE, keyboard layout Colemak DH.
-- NAS: `root@100.65.0.90` over SSH (OpenMediaVault, Docker).
+- NAS: `root@nas` over Tailscale (100.65.0.90), NixOS, config in `~/files/repos/nas`.
+- Server: `deploy@server` over Tailscale (100.125.41.118), NixOS, config in `~/files/school/HTL4/waentw/server-config`.
 - Anthropic Pro plan: be economical with tokens, use subagents only when needed.
