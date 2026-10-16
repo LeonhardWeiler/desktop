@@ -18,7 +18,6 @@
     zramSwap.enable = true;
     services.fstrim.enable = true;
     hardware.bluetooth.enable = true;
-    hardware.nvidia.prime.offload.enableOffloadCmd = true;
     services.udev.extraRules = ''
       ACTION=="add|bind", SUBSYSTEM=="platform", DRIVER=="ideapad_acpi", ATTR{conservation_mode}="1"
     '';
