@@ -17,7 +17,6 @@
           ghostty
           obs-studio
           typst
-          nodejs
           jq
           rsync
           wget
