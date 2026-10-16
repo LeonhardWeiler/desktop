@@ -19,3 +19,6 @@
      so any process of leo can delete the repository; only the NAS btrbk snapshots and `/mnt/backup` protect it.
 4. Self-host ntfy on the NAS (`services.ntfy-sh`, reachable only over Tailscale) instead of ntfy.sh, and switch
    both the laptop (`ntfy.nix`, the `ntfy` secret) and the server (`~/files/school/HTL4/waentw/server-config`) to it.
+5. t3code desktop entry: the nixpkgs package ships `t3code.desktop` without `MimeType=x-scheme-handler/t3code;`
+   and with `StartupWMClass=t3code` instead of `com.t3tools.T3Code`. Fix it in nixpkgs (PR), then drop the
+   `xdg.dataFile."applications/t3code.desktop"` override in `apps.nix`.
