@@ -1,15 +1,27 @@
+{ config, ... }:
+let
+  inherit (config) user;
+in
 {
-  flake.modules.homeManager.ntfy =
-    { pkgs, ... }:
+  flake.modules.nixos.ntfy =
+    { config, pkgs, ... }:
     {
-      xdg.configFile."ntfy/client.yml".text = builtins.toJSON {
-        subscribe = [
-          {
-            topic = "coprime-t356nf2edd7dthaxgnya";
-            command = ''${pkgs.libnotify}/bin/notify-send -a ntfy "''${t:-ntfy}" "$m"'';
-          }
-        ];
+      sops.templates."ntfy.yml" = {
+        owner = user;
+        content = builtins.toJSON {
+          subscribe = [
+            {
+              topic = config.sops.placeholder.ntfy;
+              command = ''${pkgs.libnotify}/bin/notify-send -a ntfy "''${t:-ntfy}" "$m"'';
+            }
+          ];
+        };
       };
+    };
+
+  flake.modules.homeManager.ntfy =
+    { osConfig, pkgs, ... }:
+    {
       systemd.user.services.ntfy = {
         Unit = {
           Description = "ntfy notifications";
@@ -17,7 +29,9 @@
           After = [ "graphical-session.target" ];
         };
         Service = {
-          ExecStart = "${pkgs.ntfy-sh}/bin/ntfy subscribe --from-config";
+          ExecStart = "${pkgs.ntfy-sh}/bin/ntfy subscribe --config ${
+            osConfig.sops.templates."ntfy.yml".path
+          } --from-config";
           Restart = "always";
           RestartSec = 10;
         };

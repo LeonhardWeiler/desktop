@@ -14,6 +14,7 @@ in
         useSystemdActivation = true;
         secrets = {
           restic.owner = user;
+          ntfy = { };
           "nas/leonhard-files" = { };
           "nas/shared-files" = { };
           "nas/old-drive" = { };
