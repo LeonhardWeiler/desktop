@@ -12,11 +12,7 @@
         jack.enable = true;
         extraLv2Packages = lv2;
         extraConfig.pipewire."99-custom"."context.properties" = {
-          "default.clock.rate" = 48000;
-          "default.clock.allowed-rates" = [ 48000 ];
-          "default.clock.quantum" = 1024;
           "default.clock.min-quantum" = 256;
-          "default.clock.max-quantum" = 2048;
           "resample.quality" = 10;
         };
         extraConfig.pipewire."10-eq"."context.modules" = [
