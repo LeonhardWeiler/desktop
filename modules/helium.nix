@@ -16,6 +16,7 @@
             in
             final.appimageTools.wrapType2 {
               inherit pname version src;
+              extraBwrapArgs = [ "--ro-bind-try /etc/chromium /etc/chromium" ];
               extraInstallCommands = ''
                 install -Dm644 ${contents}/helium.desktop $out/share/applications/helium.desktop
                 cp -r ${contents}/usr/share/icons $out/share/
