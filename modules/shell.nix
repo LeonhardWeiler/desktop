@@ -15,6 +15,10 @@ in
     in
     {
       home.sessionVariables = vars;
+      home.sessionPath = [
+        "$HOME/.local/bin"
+        "$GOPATH/bin"
+      ];
       systemd.user.sessionVariables = vars;
 
       programs.bash = {
@@ -30,14 +34,12 @@ in
           update = "nix flake update --flake ${repo} && rebuild && git -C ${repo} commit -m 'flake: update inputs' flake.lock && git -C ${repo} push";
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
-          todo = "nvim ./AGENT/TODO.md";
+          todo = ''nvim "$(git rev-parse --show-toplevel)/AGENT/TODO.md"'';
           camera = "ffplay -f v4l2 /dev/video0 -vf hflip -x 1280 -y 720";
           screenshot = "spectacle --region";
         };
         initExtra = ''
           PS1='$(</sys/class/power_supply/BAT0/capacity)% \w \$ '
-
-          export PATH="$HOME/.local/bin:$GOPATH/bin:$PATH"
         '';
       };
     };
