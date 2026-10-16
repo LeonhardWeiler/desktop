@@ -8,7 +8,7 @@ NixOS config for my Lenovo Legion 5 Pro 16ARH7H: KDE Plasma, btrfs, Colemak DH.
 
 ```sh
 sudo nixos-rebuild switch --flake ~/files/repos/desktop
-nix flake update   # then rebuild
+update             # nix flake update, rebuild, commit and push flake.lock
 nix fmt
 ```
 
