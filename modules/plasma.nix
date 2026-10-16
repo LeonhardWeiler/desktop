@@ -41,11 +41,9 @@ in
           enable = true;
           idleTimeout = 600;
         };
-        turnOffDisplay.idleTimeout = "never";
         displayBrightness = brightness;
         powerProfile = profile;
       };
-      hidden = "[Desktop Entry]\nHidden=true\n";
     in
     {
       systemd.user.services.refresh-rate = {
@@ -97,7 +95,7 @@ in
             "plasma-systemmonitor"
           ])
           (_: {
-            text = hidden;
+            text = "[Desktop Entry]\nHidden=true\n";
           });
       programs.plasma = {
         enable = true;
