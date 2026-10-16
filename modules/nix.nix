@@ -16,6 +16,7 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
+    nix.channel.enable = false;
     documentation.nixos.enable = false;
     programs.nix-ld.enable = true;
   };
