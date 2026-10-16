@@ -153,7 +153,6 @@ in
             "Alt+F2"
             "Search"
           ];
-          "services/voxtype-toggle.desktop"._launch = "Meta+Space";
         };
         configFile = {
           kdeglobals.General = {

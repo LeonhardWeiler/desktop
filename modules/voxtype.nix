@@ -114,6 +114,7 @@
         };
       };
 
+      programs.plasma.shortcuts."services/voxtype-toggle.desktop"._launch = "Meta+Space";
       xdg.dataFile."applications/voxtype-toggle.desktop".text = lib.generators.toINI { } {
         "Desktop Entry" = {
           Type = "Application";
@@ -123,7 +124,6 @@
           Icon = "audio-input-microphone";
           Terminal = false;
           NoDisplay = true;
-          X-KDE-Shortcuts = "Meta+Space";
         };
       };
     };
