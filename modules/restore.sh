@@ -1,4 +1,4 @@
-[ -e ~/files/repos/desktop ] && exit 0
+[ -e "$REPO" ] && exit 0
 trap 'kdialog --error "Restore failed. Run restore in a terminal to see why."' ERR
 
 tmp=$(mktemp -d)

@@ -1,8 +1,10 @@
 { config, lib, ... }:
 {
   options.user = lib.mkOption { type = lib.types.str; };
+  options.repo = lib.mkOption { type = lib.types.str; };
 
   config.user = "leo";
+  config.repo = "/home/${config.user}/files/repos/desktop";
 
   config.flake.modules.nixos.base = {
     networking.hostName = "legion";

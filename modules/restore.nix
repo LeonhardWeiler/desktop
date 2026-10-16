@@ -1,3 +1,7 @@
+{ config, ... }:
+let
+  inherit (config) repo;
+in
 {
   flake.modules.nixos.restore =
     { config, pkgs, ... }:
@@ -14,6 +18,7 @@
           kdePackages.qttools
         ];
         runtimeEnv = {
+          REPO = repo;
           SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
           RESTIC_REPOSITORY = config.services.restic.backups.nas.repository;
           RESTIC_PASSWORD_FILE = config.sops.secrets.restic.path;
