@@ -29,7 +29,7 @@ in
         initialize = true;
         paths = [
           home
-          "/var/lib"
+          "/var/lib/bluetooth"
           "/etc/NetworkManager/system-connections"
         ];
         exclude = [
@@ -38,9 +38,9 @@ in
           "${home}/.local/share/go"
           "${home}/.local/share/voxtype/models"
           "**/node_modules"
-          "**/target"
-          "**/result"
         ];
+        extraBackupArgs = [ "--exclude-caches" ];
+        checkOpts = [ "--read-data-subset=5%" ];
         timerConfig = {
           OnCalendar = "daily";
           Persistent = true;
