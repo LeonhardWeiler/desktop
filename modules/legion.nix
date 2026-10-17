@@ -8,4 +8,6 @@
       }
     ];
   };
+
+  perSystem.checks.legion = config.flake.nixosConfigurations.legion.config.system.build.toplevel;
 }

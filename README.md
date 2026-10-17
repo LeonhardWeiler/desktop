@@ -6,9 +6,10 @@ Each file in `modules/` is one feature.
 ## Use
 
 ```sh
-rebuild    # apply the config
-update     # update inputs, rebuild, commit and push flake.lock
-nix fmt    # format
+rebuild          # apply the config
+update           # update inputs, rebuild, commit and push flake.lock
+nix fmt          # format
+nix flake check  # build the system
 ```
 
 Secrets live in `modules/secrets.yaml`, edit with `sudo sops modules/secrets.yaml`.
