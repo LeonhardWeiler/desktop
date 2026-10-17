@@ -32,7 +32,7 @@ done
 SECONDS=0
 read -r bus obj < <(kdialog --title Restore --progressbar "Restoring files from the NAS" 100)
 sudo -S -p '' env RESTIC_REPOSITORY="$RESTIC_REPOSITORY" RESTIC_PASSWORD_FILE="$RESTIC_PASSWORD_FILE" "$(command -v restic)" \
-	restore latest --target / --include "$HOME" --include /etc/NetworkManager/system-connections --include /var/lib/bluetooth --json <<<"$pass" |
+	restore latest --target / --exclude "$HOME/.config/sops" --json <<<"$pass" |
 	jq --unbuffered -r 'select(.message_type == "status") | .percent_done * 100 | floor' |
 	while read -r p; do
 		qdbus "$bus" "$obj" Set "" value "$p"
