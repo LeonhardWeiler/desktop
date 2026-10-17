@@ -24,7 +24,7 @@ sudo -S -p '' install -D -m 600 "$tmp/age" "$SOPS_AGE_KEY_FILE" <<<"$pass"
 rm "$tmp/age"
 bw logout >/dev/null
 SECONDS=0
-until [ -r "$RESTIC_PASSWORD_FILE" ]; do
+until sudo -S -p '' test -e "$RESTIC_PASSWORD_FILE" <<<"$pass"; do
 	[ $SECONDS -lt 120 ]
 	sleep 1
 done
