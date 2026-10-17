@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  inherit (config) email;
+  inherit (config) email name;
 in
 {
   flake.modules.homeManager.git =
@@ -14,7 +14,7 @@ in
         enable = true;
         settings = {
           user.email = email;
-          user.name = "Leonhard Weiler";
+          user.name = name;
           core.editor = "nvim";
           init.defaultBranch = "main";
         };

@@ -4,11 +4,13 @@
   options.repo = lib.mkOption { type = lib.types.str; };
   options.nas = lib.mkOption { type = lib.types.str; };
   options.email = lib.mkOption { type = lib.types.str; };
+  options.name = lib.mkOption { type = lib.types.str; };
 
   config.user = "leo";
   config.repo = "/home/${config.user}/files/repos/desktop";
   config.nas = "nas.taild9564d.ts.net";
   config.email = "leonhard-weiler@hotmail.com";
+  config.name = "Leonhard Weiler";
 
   config.flake.modules.nixos.base = {
     time.timeZone = "Europe/Vienna";
@@ -26,7 +28,7 @@
 
     users.users.${config.user} = {
       isNormalUser = true;
-      description = "Leonhard Weiler";
+      description = config.name;
       extraGroups = [
         "wheel"
         "networkmanager"
