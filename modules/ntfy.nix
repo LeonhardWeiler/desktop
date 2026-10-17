@@ -1,6 +1,7 @@
 { config, ... }:
 let
-  inherit (config) user;
+  inherit (config) user nas;
+  server = "https://${nas}:2586";
 in
 {
   flake.modules.nixos.ntfy =
@@ -10,6 +11,7 @@ in
       sops.templates."ntfy.yml" = {
         owner = user;
         content = builtins.toJSON {
+          default-host = server;
           subscribe = [
             {
               topic = config.sops.placeholder.ntfy;
@@ -30,7 +32,7 @@ in
         script = ''
           journalctl -u "$1" -n 20 --no-pager -o cat |
             ${pkgs.curl}/bin/curl -fsS -m 10 -H "Title: ${config.networking.hostName}: $1 failed" -H "Priority: high" -H "Tags: warning" \
-              --data-binary @- "https://ntfy.sh/$(cat "$CREDENTIALS_DIRECTORY/topic")"
+              --data-binary @- "${server}/$(cat "$CREDENTIALS_DIRECTORY/topic")"
         '';
       };
       systemd.packages = [
