@@ -28,7 +28,7 @@
         shellAliases = {
           open = "xdg-open";
           dot = "cd ${repo}";
-          rebuild = "sudo nixos-rebuild switch --flake ${repo}";
+          rebuild = "nh os switch";
           update = "nix flake update --flake ${repo} --commit-lock-file && rebuild && git -C ${repo} push";
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
