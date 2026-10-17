@@ -1,10 +1,8 @@
-{ config, ... }:
-let
-  inherit (config) repo;
-in
 {
   flake.modules.homeManager.shell =
+    { config, ... }:
     let
+      repo = "${config.home.homeDirectory}/files/repos/desktop";
       vars = {
         ELECTRON_OZONE_PLATFORM_HINT = "wayland";
         EDITOR = "nvim";

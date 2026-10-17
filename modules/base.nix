@@ -1,13 +1,11 @@
 { config, lib, ... }:
 {
   options.user = lib.mkOption { type = lib.types.str; };
-  options.repo = lib.mkOption { type = lib.types.str; };
   options.nas = lib.mkOption { type = lib.types.str; };
   options.email = lib.mkOption { type = lib.types.str; };
   options.name = lib.mkOption { type = lib.types.str; };
 
   config.user = "leo";
-  config.repo = "/home/${config.user}/files/repos/desktop";
   config.nas = "nas.taild9564d.ts.net";
   config.email = "leonhard-weiler@hotmail.com";
   config.name = "Leonhard Weiler";
