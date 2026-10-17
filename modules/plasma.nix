@@ -169,9 +169,7 @@ in
               Number = 1;
               Rows = 1;
             };
-            "Tiling/${desktop}/5aa7ee16-3ece-45f1-9bac-d2cc82bbe37a" = tiling;
             "Tiling/${desktop}/793d34e8-8a7c-4e4e-a49d-42a6ba557744" = tiling;
-            "Tiling/${desktop}/89a182fe-a7ca-460e-89b4-3bb476fe4219" = tiling;
             Xwayland.Scale = 1.25;
           };
           dolphinrc = {
