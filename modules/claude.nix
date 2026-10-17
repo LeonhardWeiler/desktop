@@ -25,7 +25,7 @@
             defaultMode = "auto";
             additionalDirectories = [ "/" ];
             deny = map (p: "Read(${p})") [
-              "~/.ssh/id_*"
+              "~/.ssh/**"
               "~/.config/sops/**"
               "//run/secrets/**"
               "//run/secrets.d/**"
