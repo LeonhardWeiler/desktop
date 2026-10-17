@@ -12,8 +12,8 @@
      `/etc/chromium` read-only (untested). After `rebuild`, check `helium://policy` lists
      `ExtensionInstallForcelist`; a nixpkgs package must keep that bind.
 3. NAS (needs `ssh root@nas`, currently denied for the laptop key):
-   - Replace the `leo@arch` key in `root.openssh.authorizedKeys` of `~/files/repos/nas/configuration.nix` with
-     `~/.ssh/nas.pub`, the confirm-only key that `ssh.nix` uses for `nas`, and deploy.
+   - Deploy the NAS repo: it now authorizes only `~/.ssh/nas.pub` (the confirm-only key `ssh.nix` uses for `nas`)
+     for root instead of `leo@arch`.
    - Write the new ntfy topic (`sudo cat /run/secrets/ntfy`) to `/var/lib/nas/ntfy-topic` on the NAS.
    - Serve restic via `restic-rest-server --append-only` over Tailscale instead of the CIFS share
      and point `services.restic.backups.nas.repository` in `backup.nix` at `rest:http://nas:8000/legion`.
