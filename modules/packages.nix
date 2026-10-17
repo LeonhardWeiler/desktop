@@ -15,7 +15,6 @@
           ktimetracker
           figma-agent
           ghostty
-          obs-studio
           typst
           jq
           rsync
