@@ -13,7 +13,7 @@
    - Write the new ntfy topic (`sudo cat /run/secrets/ntfy`) to `/var/lib/nas/ntfy-topic` on the NAS.
    - Serve restic via `restic-rest-server --append-only` over Tailscale instead of the CIFS share
      and point `services.restic.backups.nas.repository` in `backup.nix` at `rest:http://nas:8000/legion`.
-     Today the CIFS share is mounted rw as leo (`uid=leo`, `0775`) and the restic password is owned by leo,
+     Today the CIFS share is mounted rw as leo (`uid=leo`, `0775`),
      so any process of leo can delete the repository; only the NAS btrbk snapshots and `/mnt/backup` protect it.
 4. Self-host ntfy on the NAS (`services.ntfy-sh`, reachable only over Tailscale) instead of ntfy.sh, and switch
    both the laptop (`ntfy.nix`, the `ntfy` secret) and the server (`~/files/school/HTL4/waentw/server-config`) to it.
