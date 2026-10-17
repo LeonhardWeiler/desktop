@@ -20,5 +20,7 @@
       clean.extraArgs = "--keep-since 30d --keep 5";
     };
     programs.nix-index-database.comma.enable = true;
+    services.dbus.implementation = "broker";
+    boot.initrd.systemd.enable = true;
   };
 }

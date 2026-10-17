@@ -2,7 +2,7 @@
 
 1. LUKS and Secure Boot: encrypt the btrfs partition in `disko.nix` (LUKS, unlocked via TPM2 with
    `systemd-cryptenroll`), sign the boot chain with lanzaboote. Needs a reinstall with `install.sh` and `restore`.
-   TPM2 unlock needs `boot.initrd.systemd.enable = true` and `security.tpm2.enable = true`; `bootctl` currently
+   TPM2 unlock needs `security.tpm2.enable = true` (systemd initrd is already on); `bootctl` currently
    reports `TPM2 Support: no`.
 2. Manually maintained packages: `helium` (AppImage overlay in `helium.nix`) and `eitype` (in `voxtype.nix`)
    are not in nixpkgs and `update` does not bump them. Helium had 8 releases in 4 weeks. Package them in nixpkgs,
