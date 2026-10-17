@@ -45,7 +45,7 @@
             end
           '';
           options = {
-            desc = "Open link in browser";
+            desc = "Open file with xdg-open";
             silent = true;
           };
         }
@@ -55,7 +55,7 @@
           "Harpoon: menu"
         )
         (desc "n" "<leader>f" (raw "function() ${telescope "find_files"}({ hidden = true }) end")
-          "Find files (inkl. hidden, ohne gitignore)"
+          "Find files (incl. hidden)"
         )
         (desc "n" "<leader>sg" (raw (telescope "live_grep")) "Live grep")
         (desc "n" "<leader>sh" (raw (telescope "help_tags")) "Help tags")
