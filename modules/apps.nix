@@ -53,7 +53,7 @@
         };
       };
 
-      home.packages = [ pkgs.t3code ];
+      home.packages = [ (pkgs.t3code.override { enableCodex = false; }) ];
       xdg.dataFile."applications/t3code.desktop".text = lib.generators.toINI { } {
         "Desktop Entry" = {
           Categories = "Development";
