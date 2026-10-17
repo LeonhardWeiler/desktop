@@ -7,10 +7,8 @@
 2. Manually maintained packages: `helium` (AppImage overlay in `helium.nix`) and `eitype` (in `voxtype.nix`)
    are not in nixpkgs and `update` does not bump them. Helium had 8 releases in 4 weeks. Package them in nixpkgs,
    then use `pkgs.helium` and `pkgs.eitype`.
-   - Helium policies: the FHS sandbox hid `/etc/chromium`, so `programs.chromium` policies (extensions,
-     `RestoreOnStartup`) and the Bitwarden native messaging host never applied. `helium.nix` now binds
-     `/etc/chromium` read-only (untested). After `rebuild`, check `helium://policy` lists
-     `ExtensionInstallForcelist`; a nixpkgs package must keep that bind.
+   - A Helium package must keep `--ro-bind-try /etc/chromium /etc/chromium` in bwrap, otherwise the
+     `programs.chromium` policies from `helium.nix` do not reach the browser.
 3. NAS (needs `ssh root@nas`, currently denied for the laptop key):
    - Deploy the NAS repo: it now authorizes only `~/.ssh/nas.pub` (the confirm-only key `ssh.nix` uses for `nas`)
      for root instead of `leo@arch`.
