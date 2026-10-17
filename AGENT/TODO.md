@@ -11,16 +11,14 @@
      `programs.chromium` policies from `helium.nix` do not reach the browser.
 3. NAS (`ssh nas`, each connection needs a confirm click by the user):
    - Write the new ntfy topic (`sudo cat /run/secrets/ntfy`) to `/var/lib/nas/ntfy-topic` on the NAS.
-4. Self-host ntfy on the NAS (`services.ntfy-sh`, reachable only over Tailscale) instead of ntfy.sh, and switch
-   both the laptop (`ntfy.nix`, the `ntfy` secret) and the server (`~/files/school/HTL4/waentw/server-config`) to it.
-5. t3code desktop entry: the nixpkgs package ships `t3code.desktop` without `MimeType=x-scheme-handler/t3code;`
+4. t3code desktop entry: the nixpkgs package ships `t3code.desktop` without `MimeType=x-scheme-handler/t3code;`
    and with `StartupWMClass=t3code` instead of `com.t3tools.T3Code`. Fix it in nixpkgs (PR), then drop the
    `xdg.dataFile."applications/t3code.desktop"` override in `apps.nix`.
-6. Old age key copies: until 2026-10-17 the age key lived in `~/.config/sops/age/keys.txt`, so it is in the btrbk
+5. Old age key copies: until 2026-10-17 the age key lived in `~/.config/sops/age/keys.txt`, so it is in the btrbk
    snapshots of `/home` (expire after 8 weeks), readable by leo, and in the old restic repository, deleted on
    2026-10-17 but still in the NAS btrbk snapshots (12 months) and on the external backup disk.
    With it the old revisions of `secrets.yaml` in git decrypt to the current values. Rotate the
    secrets themselves (backup ssh key, NAS SMB credentials, ntfy topic), then the age key (`age-keygen`, new
    recipient in `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, new `sops-age` in Bitwarden).
-7. `restore.sh` is only checked with shellcheck, never run end to end (Bitwarden login, age key install via sudo,
+6. `restore.sh` is only checked with shellcheck, never run end to end (Bitwarden login, age key install via sudo,
    rsync as root via the backup key, marker). Run it on the reinstall of item 1 and fix what breaks.
