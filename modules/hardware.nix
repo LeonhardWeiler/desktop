@@ -17,7 +17,6 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.timeout = 1;
     zramSwap.enable = true;
-    services.fstrim.enable = true;
     hardware.bluetooth.enable = true;
     services.udev.extraRules = ''
       ACTION=="add|bind", SUBSYSTEM=="platform", DRIVER=="ideapad_acpi", ATTR{conservation_mode}="1"
