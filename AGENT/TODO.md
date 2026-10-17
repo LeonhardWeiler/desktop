@@ -20,3 +20,10 @@
 5. t3code desktop entry: the nixpkgs package ships `t3code.desktop` without `MimeType=x-scheme-handler/t3code;`
    and with `StartupWMClass=t3code` instead of `com.t3tools.T3Code`. Fix it in nixpkgs (PR), then drop the
    `xdg.dataFile."applications/t3code.desktop"` override in `apps.nix`.
+6. Old age key copies: until 2026-10-17 the age key lived in `~/.config/sops/age/keys.txt`, so it is in the btrbk
+   snapshots of `/home` (expire after 8 weeks) and in the restic snapshots (up to 12 months), both readable by leo.
+   With it the old revisions of `secrets.yaml` in git decrypt to the current values. After item 3, rotate the
+   secrets themselves (restic password, NAS SMB credentials, ntfy topic), then the age key (`age-keygen`, new
+   recipient in `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, new `sops-age` in Bitwarden).
+7. `restore.sh` is only checked with shellcheck, never run end to end (Bitwarden login, age key install via sudo,
+   restic as root, marker). Run it on the reinstall of item 1 and fix what breaks.
