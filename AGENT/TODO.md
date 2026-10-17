@@ -17,7 +17,6 @@
    2026-10-17 but still in the NAS btrbk snapshots (12 months) and on the external backup disk.
    With it the old revisions of `secrets.yaml` in git decrypt to the current values. Rotate the
    secrets themselves (backup ssh key, NAS SMB credentials; the ntfy topic is only reachable on the tailnet and
-   stays), then the age key (`age-keygen`, new
-   recipient in `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, new `sops-age` in Bitwarden).
+   stays), then the age key (`age-keygen`, new recipient in `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, new `sops-age` in Bitwarden).
 5. `restore.sh` is only checked with shellcheck, never run end to end (Bitwarden login, age key install via sudo,
    rsync as root via the backup key, marker). Run it on the reinstall of item 1 and fix what breaks.
