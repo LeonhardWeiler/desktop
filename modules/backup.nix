@@ -55,7 +55,7 @@ in
         serviceConfig.Type = "oneshot";
         script = ''
           rsync -a --relative --numeric-ids -M--fake-super --delete --delete-excluded \
-            ${lib.concatMapStringsSep " " (e: "--exclude=${e}") exclude} $PATHS "$REMOTE:/" || [ $? = 24 ]
+            ${lib.concatMapStringsSep " " (e: "--exclude=${e}") exclude} $PATHS "$REMOTE:." || [ $? = 24 ]
         '';
       };
       systemd.timers.backup.timerConfig.Persistent = true;
