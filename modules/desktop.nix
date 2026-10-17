@@ -21,7 +21,6 @@
       services.orca.enable = false;
       services.speechd.enable = false;
       services.geoclue2.enable = false;
-      services.fwupd.enable = false;
       programs.nano.enable = false;
       environment.defaultPackages = [ ];
 
