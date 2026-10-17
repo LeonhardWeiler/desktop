@@ -1,15 +1,27 @@
 { config, ... }:
 let
-  inherit (config) user;
+  inherit (config) user nas;
 in
 {
   flake.modules.nixos.backup =
-    { config, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       home = config.users.users.${user}.home;
+      exclude = [
+        "${home}/.cache"
+        "${home}/.local/share/Steam"
+        "${home}/.local/share/go"
+        "${home}/.local/share/voxtype/models"
+        "node_modules"
+      ];
     in
     {
-      sops.secrets.restic = { };
+      sops.secrets.backup = { };
 
       services.btrbk.instances.home = {
         onCalendar = "hourly";
@@ -24,35 +36,28 @@ in
         };
       };
 
-      systemd.services.restic-backups-nas.unitConfig.RequiresMountsFor = "/mnt/nas/leonhard-files";
-      services.restic.backups.nas = {
-        repository = "/mnt/nas/leonhard-files/restic/${config.networking.hostName}";
-        passwordFile = config.sops.secrets.restic.path;
-        initialize = true;
-        paths = [
-          home
-          "/var/lib/bluetooth"
-          "/etc/NetworkManager/system-connections"
+      systemd.services.backup = {
+        wants = [ "network-online.target" ];
+        after = [
+          "network-online.target"
+          "tailscaled.service"
         ];
-        exclude = [
-          "${home}/.cache"
-          "${home}/.local/share/Steam"
-          "${home}/.local/share/go"
-          "${home}/.local/share/voxtype/models"
-          "**/node_modules"
+        startAt = "daily";
+        path = [
+          pkgs.rsync
+          pkgs.openssh
         ];
-        extraBackupArgs = [ "--exclude-caches" ];
-        checkOpts = [ "--read-data-subset=5%" ];
-        timerConfig = {
-          OnCalendar = "daily";
-          Persistent = true;
+        environment = {
+          PATHS = "${home} /var/lib/bluetooth /etc/NetworkManager/system-connections";
+          RSYNC_RSH = "ssh -F none -i ${config.sops.secrets.backup.path}";
+          REMOTE = "root@${nas}";
         };
-        pruneOpts = [
-          "--group-by paths"
-          "--keep-daily 7"
-          "--keep-weekly 8"
-          "--keep-monthly 12"
-        ];
+        serviceConfig.Type = "oneshot";
+        script = ''
+          rsync -a --relative --numeric-ids -M--fake-super --delete --delete-excluded \
+            ${lib.concatMapStringsSep " " (e: "--exclude=${e}") exclude} $PATHS "$REMOTE:/" || [ $? = 24 ]
+        '';
       };
+      systemd.timers.backup.timerConfig.Persistent = true;
     };
 }

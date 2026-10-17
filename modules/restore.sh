@@ -24,16 +24,17 @@ sudo -S -p '' install -D -m 600 "$tmp/age" "$SOPS_AGE_KEY_FILE" <<<"$pass"
 rm "$tmp/age"
 bw logout >/dev/null
 SECONDS=0
-until sudo -S -p '' test -e "$RESTIC_PASSWORD_FILE" <<<"$pass"; do
+until sudo -S -p '' test -e "$KEY" <<<"$pass"; do
 	[ $SECONDS -lt 120 ]
 	sleep 1
 done
 
 SECONDS=0
 read -r bus obj < <(kdialog --title Restore --progressbar "Restoring files from the NAS" 100)
-sudo -S -p '' env RESTIC_REPOSITORY="$RESTIC_REPOSITORY" RESTIC_PASSWORD_FILE="$RESTIC_PASSWORD_FILE" "$(command -v restic)" \
-	restore latest --target / --exclude "$HOME/.config/sops" --json <<<"$pass" |
-	jq --unbuffered -r 'select(.message_type == "status") | .percent_done * 100 | floor' |
+read -ra src <<<"$PATHS"
+sudo -S -p '' env RSYNC_RSH="$RSYNC_RSH" "$(command -v rsync)" -a --relative --numeric-ids -M--fake-super \
+	--exclude "$MARKER" --info=progress2 --no-inc-recursive "${src[@]/#/$REMOTE:}" / <<<"$pass" |
+	awk -v RS='\r' '{ for (i = 1; i <= NF; i++) if ($i ~ /%$/) { print $i + 0; fflush() } }' |
 	while read -r p; do
 		qdbus "$bus" "$obj" Set "" value "$p"
 		if [ "$p" -gt 0 ]; then

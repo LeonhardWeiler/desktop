@@ -13,8 +13,8 @@ in
           helium
           tailscale
           bitwarden-cli
-          restic
-          jq
+          rsync
+          openssh
           kdePackages.kdialog
           kdePackages.qttools
         ];
@@ -23,15 +23,14 @@ in
           MARKER = marker;
           NAS = nas;
           SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
-          RESTIC_REPOSITORY = config.services.restic.backups.nas.repository;
-          RESTIC_PASSWORD_FILE = config.sops.secrets.restic.path;
+          inherit (config.systemd.services.backup.environment) PATHS RSYNC_RSH REMOTE;
+          KEY = config.sops.secrets.backup.path;
         };
         text = builtins.readFile ./restore.sh;
       };
     in
     {
       environment.systemPackages = [ restore ];
-      services.restic.backups.nas.exclude = [ marker ];
       environment.etc."xdg/autostart/restore.desktop".text = ''
         [Desktop Entry]
         Type=Application
