@@ -7,7 +7,7 @@ Each file in `modules/` is one feature.
 
 ```sh
 rebuild          # apply the config
-update           # update inputs, rebuild, commit and push flake.lock
+update           # update inputs, commit flake.lock, rebuild and push
 nix fmt          # format
 nix flake check  # build the system
 ```

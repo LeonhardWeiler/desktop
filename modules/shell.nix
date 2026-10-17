@@ -29,7 +29,7 @@
           open = "xdg-open";
           dot = "cd ${repo}";
           rebuild = "sudo nixos-rebuild switch --flake ${repo}";
-          update = "nix flake update --flake ${repo} && rebuild && git -C ${repo} commit -m 'flake: update inputs' flake.lock && git -C ${repo} push";
+          update = "nix flake update --flake ${repo} --commit-lock-file && rebuild && git -C ${repo} push";
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
           todo = ''nvim "$(git rev-parse --show-toplevel)/AGENT/TODO.md"'';
