@@ -6,6 +6,7 @@ in
   flake.modules.nixos.ntfy =
     { config, pkgs, ... }:
     {
+      sops.secrets.ntfy = { };
       sops.templates."ntfy.yml" = {
         owner = user;
         content = builtins.toJSON {

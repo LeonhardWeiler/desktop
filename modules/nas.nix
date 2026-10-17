@@ -4,31 +4,24 @@ let
 in
 {
   flake.modules.nixos.nas =
-    { config, utils, ... }:
-    let
-      shares = [
-        "leonhard-files"
-        "shared-files"
-        "old-drive"
-      ];
-    in
     {
-      systemd.units = builtins.listToAttrs (
-        map (s: {
-          name = "${utils.escapeSystemdPath "/mnt/nas/${s}"}.mount";
-          value = {
+      config,
+      lib,
+      utils,
+      ...
+    }:
+    lib.mkMerge (
+      map
+        (s: {
+          sops.secrets."nas/${s}" = { };
+          systemd.units."${utils.escapeSystemdPath "/mnt/nas/${s}"}.mount" = {
             overrideStrategy = "asDropin";
             text = ''
               [Unit]
               StartLimitIntervalSec=0
             '';
           };
-        }) shares
-      );
-      fileSystems = builtins.listToAttrs (
-        map (s: {
-          name = "/mnt/nas/${s}";
-          value = {
+          fileSystems."/mnt/nas/${s}" = {
             device = "//${nas}/${s}";
             fsType = "cifs";
             options = [
@@ -49,7 +42,11 @@ in
               "nobrl"
             ];
           };
-        }) shares
-      );
-    };
+        })
+        [
+          "leonhard-files"
+          "shared-files"
+          "old-drive"
+        ]
+    );
 }

@@ -9,6 +9,8 @@ in
       home = config.users.users.${user}.home;
     in
     {
+      sops.secrets.restic.owner = user;
+
       services.btrbk.instances.home = {
         onCalendar = "hourly";
         settings = {

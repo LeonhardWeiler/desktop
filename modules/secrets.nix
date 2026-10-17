@@ -1,7 +1,4 @@
-{ inputs, config, ... }:
-let
-  inherit (config) user;
-in
+{ inputs, ... }:
 {
   flake.modules.nixos.secrets =
     { config, pkgs, ... }:
@@ -14,13 +11,6 @@ in
         defaultSopsFile = ./secrets.yaml;
         age.keyFile = "/var/lib/sops-nix/key.txt";
         useSystemdActivation = true;
-        secrets = {
-          restic.owner = user;
-          ntfy = { };
-          "nas/leonhard-files" = { };
-          "nas/shared-files" = { };
-          "nas/old-drive" = { };
-        };
       };
       systemd.paths.sops-install-secrets = {
         wantedBy = [ "multi-user.target" ];
