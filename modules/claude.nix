@@ -15,9 +15,9 @@
           };
         };
       };
+      home.file."${config.programs.claude-code.configDir}/settings.json".force = true;
       programs.claude-code = {
         enable = true;
-        mutableSettings = true;
         context = ./claude/CLAUDE.md;
         skills = ./claude/skills;
         settings = {
