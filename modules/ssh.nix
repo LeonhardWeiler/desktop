@@ -5,6 +5,7 @@
     enableAskPassword = true;
     extraConfig = ''
       Host nas ${config.nas}
+        User root
         IdentityFile ~/.ssh/nas
         IdentitiesOnly yes
         AddKeysToAgent confirm
