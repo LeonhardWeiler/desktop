@@ -10,7 +10,6 @@
         khelpcenter
         konsole
         krdp
-        kwin-x11
         plasma-browser-integration
         plasma-keyboard
         plasma-workspace-wallpapers
