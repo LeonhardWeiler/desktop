@@ -31,6 +31,7 @@ in
         ignores = [
           "**/.claude/settings.local.json"
           "*.bak"
+          ".direnv/"
         ];
       };
     };

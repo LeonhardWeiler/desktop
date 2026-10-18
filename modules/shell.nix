@@ -19,6 +19,13 @@
       ];
       systemd.user.sessionVariables = vars;
 
+      programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+        silent = true;
+        config.whitelist.prefix = [ "${config.home.homeDirectory}/files" ];
+      };
+
       programs.bash = {
         enable = true;
         historyFile = "$HOME/.local/state/bash/history";
