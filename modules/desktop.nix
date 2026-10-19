@@ -29,6 +29,6 @@
         noto-fonts-color-emoji
         nerd-fonts.jetbrains-mono
       ];
-      fonts.fontconfig.localConf = "<dir>~/files/jl/grafiken/fonts</dir>";
+      fonts.fontconfig.localConf = "<fontconfig><dir>~/files/jl/grafiken/fonts</dir></fontconfig>";
     };
 }
