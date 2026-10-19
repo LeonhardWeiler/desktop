@@ -10,6 +10,7 @@
           bitwarden-desktop
           signal-desktop
           teams-for-linux
+          slack
           zed-editor
           ktailctl
           ktimetracker
