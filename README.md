@@ -45,5 +45,3 @@ The other machine must reach the laptop over SSH, e.g. in the same WiFi, and nee
 
 - Hourly btrfs snapshots of `/home` in `/mnt/btrfs/snapshots`.
 - Daily rsync mirror to `leonhard-files/backup/legion` on the NAS, history in the NAS snapshots: `sudo systemctl start backup`.
-
-Games on the RTX 3070: Steam launch option `nvidia-offload %command%`.

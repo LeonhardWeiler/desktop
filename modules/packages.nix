@@ -2,7 +2,6 @@
   flake.modules.nixos.packages =
     { pkgs, ... }:
     {
-      programs.steam.enable = true;
       programs.partition-manager.enable = true;
 
       environment.systemPackages =

@@ -14,7 +14,6 @@ in
       home = config.users.users.${user}.home;
       exclude = [
         "${home}/.cache"
-        "${home}/.local/share/Steam"
         "${home}/.local/share/go"
         "${home}/.local/share/voxtype/models"
         "node_modules"
