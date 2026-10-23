@@ -1,8 +1,9 @@
 {
   flake.modules.homeManager.shell =
-    { config, ... }:
+    { config, pkgs, ... }:
     let
       repo = "${config.home.homeDirectory}/files/repos/desktop";
+      nix-update = "${pkgs.nix-update}/bin/nix-update --flake --commit";
       vars = {
         ELECTRON_OZONE_PLATFORM_HINT = "wayland";
         EDITOR = "nvim";
@@ -36,7 +37,7 @@
           open = "xdg-open";
           dot = "cd ${repo}";
           rebuild = "nh os switch";
-          update = "nix flake update --flake ${repo} --commit-lock-file && rebuild && git -C ${repo} push";
+          update = "(cd ${repo} && nix flake update --commit-lock-file && ${nix-update} helium && ${nix-update} eitype) && rebuild && git -C ${repo} push";
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
           todo = ''nvim "$(git rev-parse --show-toplevel)/AGENT/TODO.md"'';
