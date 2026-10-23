@@ -59,7 +59,7 @@ in
           RestartSec = "5min";
         };
         script = ''
-          rsync -a --relative --numeric-ids -M--fake-super --delete --delete-excluded \
+          rsync -a --info=name1,stats2 --relative --numeric-ids -M--fake-super --delete --delete-excluded \
             ${lib.concatMapStringsSep " " (e: "--exclude=${e}") exclude} $PATHS "$REMOTE:." || [ $? = 24 ]
         '';
       };
