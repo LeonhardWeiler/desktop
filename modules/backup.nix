@@ -51,7 +51,13 @@ in
           RSYNC_RSH = "ssh -F none -i ${config.sops.secrets.backup.path}";
           REMOTE = "root@${nas}";
         };
-        serviceConfig.Type = "oneshot";
+        startLimitBurst = 6;
+        startLimitIntervalSec = 3600;
+        serviceConfig = {
+          Type = "oneshot";
+          Restart = "on-failure";
+          RestartSec = "5min";
+        };
         script = ''
           rsync -a --relative --numeric-ids -M--fake-super --delete --delete-excluded \
             ${lib.concatMapStringsSep " " (e: "--exclude=${e}") exclude} $PATHS "$REMOTE:." || [ $? = 24 ]
