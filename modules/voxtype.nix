@@ -1,4 +1,33 @@
+let
+  eitype =
+    {
+      rustPlatform,
+      fetchFromGitHub,
+      pkg-config,
+      libxkbcommon,
+    }:
+    rustPlatform.buildRustPackage rec {
+      pname = "eitype";
+      version = "0.2.2";
+      src = fetchFromGitHub {
+        owner = "Adam-D-Lewis";
+        repo = "eitype";
+        tag = version;
+        hash = "sha256-s5g6METDi8/jPEwZursorYWN8X96VlyVPtd8dCCVIlw=";
+      };
+      cargoHash = "sha256-k0JU3Y83aPHgQpyiG6DXxBzdYSMOmH42kPCxXWtNtkQ=";
+      nativeBuildInputs = [ pkg-config ];
+      buildInputs = [ libxkbcommon ];
+      doCheck = false;
+    };
+in
 {
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.eitype = pkgs.callPackage eitype { };
+    };
+
   flake.modules.homeManager.voxtype =
     {
       lib,
@@ -9,24 +38,10 @@
     let
       toml = pkgs.formats.toml { };
       model = "large-v3-turbo";
-      eitype = pkgs.rustPlatform.buildRustPackage rec {
-        pname = "eitype";
-        version = "0.2.2";
-        src = pkgs.fetchFromGitHub {
-          owner = "Adam-D-Lewis";
-          repo = "eitype";
-          tag = version;
-          hash = "sha256-s5g6METDi8/jPEwZursorYWN8X96VlyVPtd8dCCVIlw=";
-        };
-        cargoHash = "sha256-k0JU3Y83aPHgQpyiG6DXxBzdYSMOmH42kPCxXWtNtkQ=";
-        nativeBuildInputs = [ pkgs.pkg-config ];
-        buildInputs = [ pkgs.libxkbcommon ];
-        doCheck = false;
-      };
     in
     {
       home.packages = [
-        eitype
+        (pkgs.callPackage eitype { })
         pkgs.quickshell
       ];
       services.voxtype = {
