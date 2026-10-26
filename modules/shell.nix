@@ -38,7 +38,7 @@
           dot = "cd ${repo}";
           rebuild = "git -C ${repo} pull --rebase --autostash && nh os switch";
           update = "(cd ${repo} && git pull --rebase --autostash && nix flake update --commit-lock-file && ${nix-update} helium && ${nix-update} eitype) && nh os switch && git -C ${repo} push";
-          backup = "sudo systemctl start --no-block backup && journalctl -fu backup";
+          backup = "journalctl -fu backup --since now & sudo systemctl start backup; sleep 1; kill $!";
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
           todo = ''nvim "$(git rev-parse --show-toplevel)/AGENT/TODO.md"'';
