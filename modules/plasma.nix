@@ -20,17 +20,25 @@ in
     }:
     let
       desktop = "d84a00b2-e864-40e5-8264-7ee48d189e5a";
-      tiling = {
-        padding = 4;
-        tiles = builtins.toJSON {
-          layoutDirection = "horizontal";
-          tiles = map (width: { inherit width; }) [
-            0.25
-            0.5
-            0.25
-          ];
-        };
-      };
+      display =
+        {
+          legion = {
+            output = "793d34e8-8a7c-4e4e-a49d-42a6ba557744";
+            tiles = [
+              0.25
+              0.5
+              0.25
+            ];
+          };
+          pc = {
+            output = "1895da8b-1dc3-4453-ae6d-8e385195f84e";
+            tiles = [
+              0.5
+              0.5
+            ];
+          };
+        }
+        .${osConfig.networking.hostName};
       power = brightness: profile: {
         autoSuspend = {
           action = "sleep";
@@ -131,8 +139,13 @@ in
               Number = 1;
               Rows = 1;
             };
-            "Tiling/${desktop}/793d34e8-8a7c-4e4e-a49d-42a6ba557744" = tiling;
-            Xwayland.Scale = 1.25;
+            "Tiling/${desktop}/${display.output}" = {
+              padding = 4;
+              tiles = builtins.toJSON {
+                layoutDirection = "horizontal";
+                tiles = map (width: { inherit width; }) display.tiles;
+              };
+            };
           };
           dolphinrc = {
             MainWindow.MenuBar = "Disabled";

@@ -2,6 +2,7 @@
   flake.modules.homeManager.legion =
     { lib, pkgs, ... }:
     {
+      programs.plasma.configFile.kwinrc.Xwayland.Scale = 1.25;
       systemd.user.services.refresh-rate = {
         Unit = {
           Description = "Panel scale and refresh rate by power source";
