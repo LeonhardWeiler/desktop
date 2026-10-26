@@ -40,6 +40,25 @@
         "type": "github"
       }
     },
+    "game37": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1793008672,
+        "narHash": "sha256-m7c3QoVw1bPYonNwrvquB34y85o39QJ5k6mhOhF65tY=",
+        "owner": "motitschka",
+        "repo": "Game37",
+        "rev": "bcb9f3971ec54f5317c23f4ece770a68b0b22a17",
+        "type": "github"
+      },
+      "original": {
+        "owner": "motitschka",
+        "ref": "v0.1.0-beta.1",
+        "repo": "Game37",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -117,6 +136,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1792898606,
+        "narHash": "sha256-Mg3rRjsbMqhSMxop5PYMXos8SwAjejrxSgVThTvP9eg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1f607aa79b6356ed45d3cd3c8079c196e79efa2c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1792773339,
         "narHash": "sha256-rZLrzrC6i+jnTAlvPZHogKDulY7WWDEv9hJeHieO7Zw=",
         "owner": "NixOS",
@@ -182,11 +217,12 @@
       "inputs": {
         "disko": "disko",
         "flake-parts": "flake-parts",
+        "game37": "game37",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix"
