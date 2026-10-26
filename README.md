@@ -50,4 +50,4 @@ The other machine must reach the laptop over SSH, e.g. in the same WiFi, and nee
 ## Backups
 
 - Hourly btrfs snapshots of `/home` in `/mnt/btrfs/snapshots`.
-- Daily rsync mirror to `leonhard-files/backup/<host>` on the NAS, history in the NAS snapshots: `sudo systemctl start backup`.
+- Daily rsync mirror of the latest snapshot to `leonhard-files/backup/<host>` on the NAS, history in the NAS snapshots: `sudo systemctl start backup`.

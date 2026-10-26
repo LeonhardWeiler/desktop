@@ -45,6 +45,7 @@ in
         path = [
           pkgs.rsync
           pkgs.openssh
+          pkgs.util-linux
         ];
         environment = {
           PATHS = "${home} /var/lib/bluetooth /etc/NetworkManager/system-connections";
@@ -57,8 +58,11 @@ in
           Type = "oneshot";
           Restart = "on-failure";
           RestartSec = "5min";
+          PrivateMounts = true;
         };
         script = ''
+          snaps=(/mnt/btrfs/snapshots/home.*)
+          mount --bind "''${snaps[-1]}" /home
           rsync -a --info=name1,stats2 --relative --numeric-ids -M--fake-super --delete --delete-excluded \
             ${lib.concatMapStringsSep " " (e: "--exclude=${e}") exclude} $PATHS "$REMOTE:." || [ $? = 24 ]
         '';
