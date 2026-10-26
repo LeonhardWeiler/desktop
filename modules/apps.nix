@@ -39,6 +39,7 @@
             "x-scheme-handler/bitwarden" = "bitwarden.desktop";
           };
       };
+      xdg.configFile."mimeapps.list".force = true;
 
       xdg.configFile."autostart/bitwarden.desktop" = {
         force = true;
