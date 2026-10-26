@@ -38,7 +38,14 @@ in
           "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
           "edibdbjcniadpccecjdfdjjppcpchdlm" # I still don't care about cookies
         ];
-        extraOpts.RestoreOnStartup = 1;
+        defaultSearchProviderEnabled = true;
+        defaultSearchProviderSearchURL = "https://duckduckgo.com/?q={searchTerms}";
+        defaultSearchProviderSuggestURL = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
+        extraOpts = {
+          RestoreOnStartup = 1;
+          DefaultSearchProviderName = "DuckDuckGo";
+          DefaultSearchProviderKeyword = "ddg";
+        };
       };
     };
 }
