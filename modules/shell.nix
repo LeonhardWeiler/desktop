@@ -39,7 +39,7 @@
           rebuild = "nh os switch";
           update = "(cd ${repo} && nix flake update --commit-lock-file && ${nix-update} helium && ${nix-update} eitype) && rebuild && git -C ${repo} push";
           backup = "sudo systemctl start --no-block backup && journalctl -fu backup";
-          notes ="cd $HOME/files/repos/notes/";
+          notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
           todo = ''nvim "$(git rev-parse --show-toplevel)/AGENT/TODO.md"'';
           camera = "ffplay -f v4l2 /dev/video0 -vf hflip -x 1280 -y 720";

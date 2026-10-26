@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.disko = {
+  flake.modules.nixos.legion = {
     imports = [ inputs.disko.nixosModules.disko ];
     disko.devices.disk.ssd = {
       device = "/dev/nvme0n1";

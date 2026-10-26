@@ -3,7 +3,7 @@ let
   inherit (config) user nas email;
 in
 {
-  flake.modules.nixos.restore =
+  flake.modules.nixos.legion =
     { config, pkgs, ... }:
     let
       marker = "${config.users.users.${user}.home}/.local/state/restored";

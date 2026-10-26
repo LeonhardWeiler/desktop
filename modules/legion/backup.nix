@@ -3,7 +3,7 @@ let
   inherit (config) user nas;
 in
 {
-  flake.modules.nixos.backup =
+  flake.modules.nixos.legion =
     {
       config,
       lib,

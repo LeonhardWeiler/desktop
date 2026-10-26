@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.hardware = {
+  flake.modules.nixos.legion = {
     imports = [ inputs.nixos-hardware.nixosModules.lenovo-legion-16arh7h-hybrid ];
     boot.initrd.availableKernelModules = [
       "nvme"

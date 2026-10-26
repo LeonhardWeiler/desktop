@@ -1,4 +1,4 @@
-{ inputs, config, ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.home = {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -6,7 +6,6 @@
       useGlobalPkgs = true;
       useUserPackages = true;
       sharedModules = [ inputs.plasma-manager.homeModules.plasma-manager ];
-      users.${config.user}.imports = builtins.attrValues config.flake.modules.homeManager;
     };
   };
 
