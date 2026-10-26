@@ -36,8 +36,8 @@
         shellAliases = {
           open = "xdg-open";
           dot = "cd ${repo}";
-          rebuild = "nh os switch";
-          update = "(cd ${repo} && nix flake update --commit-lock-file && ${nix-update} helium && ${nix-update} eitype) && rebuild && git -C ${repo} push";
+          rebuild = "git -C ${repo} pull --rebase --autostash && nh os switch";
+          update = "(cd ${repo} && git pull --rebase --autostash && nix flake update --commit-lock-file && ${nix-update} helium && ${nix-update} eitype) && nh os switch && git -C ${repo} push";
           backup = "sudo systemctl start --no-block backup && journalctl -fu backup";
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
@@ -46,7 +46,7 @@
           screenshot = "spectacle --region";
         };
         initExtra = ''
-          PS1='$(</sys/class/power_supply/BAT0/capacity)% \w \$ '
+          PS1='$([ -e /sys/class/power_supply/BAT0 ] && echo "$(</sys/class/power_supply/BAT0/capacity)% ")\w \$ '
         '';
       };
     };
