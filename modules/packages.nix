@@ -4,6 +4,10 @@
     {
       programs.partition-manager.enable = true;
 
+      systemd.packages = [
+        (pkgs.writeTextDir "lib/systemd/user/app-com.mitchellh.ghostty.service.d/10-type.conf" "[Service]\nType=dbus\n")
+      ];
+
       environment.systemPackages =
         (with pkgs; [
           bitwarden-desktop
