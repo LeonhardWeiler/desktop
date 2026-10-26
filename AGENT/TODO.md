@@ -19,3 +19,8 @@
    stays), then the age key (`age-keygen`, new recipient in `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, new `sops-age` in Bitwarden).
 5. `restore.sh` is only checked with shellcheck, never run end to end (Bitwarden login, age key install via sudo,
    rsync as root via the backup key, marker). Run it on the reinstall of item 1 and fix what breaks.
+6. `pc` uses the same age key as `legion`. Give it its own key: `age-keygen` on `pc`, add the recipient to
+   `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, store it in Bitwarden as `sops-age-pc`.
+7. `backup` and `restore` are `legion` only (`modules/legion/`): the NAS maps the backup key to
+   `leonhard-files/backup/legion`, so `pc` with the same key would overwrite that mirror with `--delete`.
+   For `pc`: own backup key and directory on the NAS (`~/files/repos/nas`, `storage.nix`), then make both modules shared.
