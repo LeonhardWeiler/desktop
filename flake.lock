@@ -45,16 +45,15 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1793008672,
-        "narHash": "sha256-m7c3QoVw1bPYonNwrvquB34y85o39QJ5k6mhOhF65tY=",
+        "lastModified": 1793009617,
+        "narHash": "sha256-bCxN7NJqtyz/dRkE1/33kelAfzPpVATiUjFMfeI4QQo=",
         "owner": "motitschka",
         "repo": "Game37",
-        "rev": "bcb9f3971ec54f5317c23f4ece770a68b0b22a17",
+        "rev": "4bdfcf80c22a96d245e7db4038380b90ea836600",
         "type": "github"
       },
       "original": {
         "owner": "motitschka",
-        "ref": "v0.1.0-beta.1",
         "repo": "Game37",
         "type": "github"
       }
