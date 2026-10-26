@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 repo=github:LeonhardWeiler/desktop
-host=${1:-legion}
+host=${1:?missing host: legion or pc}
 sudo nix --experimental-features 'nix-command flakes' run --inputs-from "$repo" disko -- \
   --mode destroy,format,mount --flake "$repo#$host"
 sudo nixos-install --no-root-passwd --flake "$repo#$host"

@@ -27,7 +27,7 @@ Each host has its own age key, in Bitwarden as `sops-age-<host>`.
 2. Boot the [minimal NixOS ISO](https://nixos.org/download/#nixos-iso) from a stick (F12; if it fails, turn off Secure Boot with F2).
 3. Run `nmtui` to connect to WiFi, then run:
    ```sh
-   bash <(curl -L coprime.tech/legion) <host>
+   bash <(curl -L coprime.tech/desktop) <host>
    ```
 4. Log in as `leo`, connect to WiFi. `restore` runs on its own, asks for the Bitwarden master password and the password of `leo`, brings back `~`, WiFi and Bluetooth from the NAS and restarts.
 5. Log in to the Bitwarden app, server `https://nas.taild9564d.ts.net:8443`.
@@ -43,7 +43,7 @@ The other machine must reach the laptop over SSH, e.g. in the same WiFi, and nee
    Make sure SSH login works (on the NixOS ISO run `passwd`) and note the IP from `ip a`.
 2. On the other machine run this, enter `user@ip` and that user's password, then set the password for `leo`:
    ```sh
-   bash <(curl -L coprime.tech/legion-anywhere) <host>
+   bash <(curl -L coprime.tech/desktop-anywhere) <host>
    ```
 3. Continue with step 4 above.
 

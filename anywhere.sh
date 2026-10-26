@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-host=${1:-legion}
+host=${1:?missing host: legion or pc}
 read -rp "Target as user@ip: " target
 key=$(mktemp -d)/key
 ssh-keygen -q -t ed25519 -N "" -f "$key"
