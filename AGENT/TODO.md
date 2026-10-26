@@ -16,11 +16,6 @@
    2026-10-17 but still in the NAS btrbk snapshots (12 months) and on the external backup disk.
    With it the old revisions of `secrets.yaml` in git decrypt to the current values. Rotate the
    secrets themselves (backup ssh key, NAS SMB credentials; the ntfy topic is only reachable on the tailnet and
-   stays), then the age key (`age-keygen`, new recipient in `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, new `sops-age` in Bitwarden).
+   stays), then the age key (`age-keygen`, new recipient in `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, new `sops-age-legion` and `sops-age-pc` in Bitwarden).
 5. `restore.sh` is only checked with shellcheck, never run end to end (Bitwarden login, age key install via sudo,
    rsync as root via the backup key, marker). Run it on the reinstall of item 1 and fix what breaks.
-6. `pc` uses the same age key as `legion`. Give it its own key: `age-keygen` on `pc`, add the recipient to
-   `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, store it in Bitwarden as `sops-age-pc`.
-7. `backup` and `restore` are `legion` only (`modules/legion/`): the NAS maps the backup key to
-   `leonhard-files/backup/legion`, so `pc` with the same key would overwrite that mirror with `--delete`.
-   For `pc`: own backup key and directory on the NAS (`~/files/repos/nas`, `storage.nix`), then make both modules shared.

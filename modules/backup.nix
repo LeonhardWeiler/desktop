@@ -3,7 +3,7 @@ let
   inherit (config) user nas;
 in
 {
-  flake.modules.nixos.legion =
+  flake.modules.nixos.backup =
     {
       config,
       lib,
@@ -20,7 +20,7 @@ in
       ];
     in
     {
-      sops.secrets.backup = { };
+      sops.secrets.backup.key = "backup/${config.networking.hostName}";
 
       services.btrbk.instances.home = {
         onCalendar = "hourly";

@@ -1,29 +1,35 @@
 # desktop
 
-NixOS config for my Lenovo Legion 5 Pro: KDE Plasma, btrfs, Colemak DH.
-Each file in `modules/` is one feature.
+NixOS config for my machines: KDE Plasma, btrfs, Colemak DH.
+Each file in `modules/` is one feature, shared by all hosts.
+`modules/<host>/` holds what only one host gets.
+
+| Host     | Machine                           |
+| -------- | --------------------------------- |
+| `legion` | Lenovo Legion 5 Pro laptop        |
+| `pc`     | Desktop PC, i5-11500, RTX 3070    |
 
 ## Use
 
 ```sh
-rebuild          # apply the config
-update           # update inputs, commit flake.lock, rebuild and push
+rebuild          # git pull, apply the config
+update           # git pull, update inputs, commit flake.lock, rebuild and push
 nix fmt          # format
-nix flake check  # build the system
+nix flake check  # build all hosts
 ```
 
 Secrets live in `modules/secrets.yaml`, edit with `sudo sops modules/secrets.yaml`.
-The age key is in Bitwarden as `sops-age`.
+Each host has its own age key, in Bitwarden as `sops-age-<host>`.
 
 ## Install
 
-1. Remove the old `legion` machine in the [Tailscale admin console](https://login.tailscale.com/admin/machines) to avoid to name the new device legion-1.
+1. Remove the old machine in the [Tailscale admin console](https://login.tailscale.com/admin/machines), otherwise the new one is named e.g. `legion-1`.
 2. Boot the [minimal NixOS ISO](https://nixos.org/download/#nixos-iso) from a stick (F12; if it fails, turn off Secure Boot with F2).
 3. Run `nmtui` to connect to WiFi, then run:
    ```sh
-   bash <(curl -L coprime.tech/legion)
+   bash <(curl -L coprime.tech/legion) <host>
    ```
-4. Log in as `leo`, connect to WiFi. `restore` runs on its own, asks for the Bitwarden master password and the password of `leo`, brings back `~`, WiFi and Bluetooth from the NAS and restarts the laptop.
+4. Log in as `leo`, connect to WiFi. `restore` runs on its own, asks for the Bitwarden master password and the password of `leo`, brings back `~`, WiFi and Bluetooth from the NAS and restarts.
 5. Log in to the Bitwarden app, server `https://nas.taild9564d.ts.net:8443`.
 
 ### From another machine with nixos-anywhere
@@ -37,11 +43,11 @@ The other machine must reach the laptop over SSH, e.g. in the same WiFi, and nee
    Make sure SSH login works (on the NixOS ISO run `passwd`) and note the IP from `ip a`.
 2. On the other machine run this, enter `user@ip` and that user's password, then set the password for `leo`:
    ```sh
-   bash <(curl -L coprime.tech/legion-anywhere)
+   bash <(curl -L coprime.tech/legion-anywhere) <host>
    ```
 3. Continue with step 4 above.
 
 ## Backups
 
 - Hourly btrfs snapshots of `/home` in `/mnt/btrfs/snapshots`.
-- Daily rsync mirror to `leonhard-files/backup/legion` on the NAS, history in the NAS snapshots: `sudo systemctl start backup`.
+- Daily rsync mirror to `leonhard-files/backup/<host>` on the NAS, history in the NAS snapshots: `sudo systemctl start backup`.

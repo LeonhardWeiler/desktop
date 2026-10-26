@@ -3,7 +3,7 @@ let
   inherit (config) user nas email;
 in
 {
-  flake.modules.nixos.legion =
+  flake.modules.nixos.restore =
     { config, pkgs, ... }:
     let
       marker = "${config.users.users.${user}.home}/.local/state/restored";
@@ -19,6 +19,7 @@ in
           kdePackages.qttools
         ];
         runtimeEnv = {
+          AGE_ITEM = "sops-age-${config.networking.hostName}";
           EMAIL = email;
           MARKER = marker;
           NAS = nas;

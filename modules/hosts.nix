@@ -7,6 +7,7 @@
 let
   hosts = [
     "legion"
+    "pc"
   ];
   shared = class: builtins.attrValues (removeAttrs config.flake.modules.${class} hosts);
 in

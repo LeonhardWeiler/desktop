@@ -19,7 +19,7 @@ bw config server "https://$NAS:8443" >/dev/null
 BW_SESSION=$(BW_PASSWORD=$bwpass bw login "$EMAIL" --passwordenv BW_PASSWORD --raw)
 export BW_SESSION
 umask 077
-bw get password sops-age >"$tmp/age"
+bw get password "$AGE_ITEM" >"$tmp/age"
 sudo -S -p '' install -D -m 600 "$tmp/age" "$SOPS_AGE_KEY_FILE" <<<"$pass"
 rm "$tmp/age"
 bw logout >/dev/null
@@ -45,5 +45,5 @@ qdbus "$bus" "$obj" close
 
 mkdir -p "$(dirname "$MARKER")"
 touch "$MARKER"
-kdialog --msgbox "All files are back. The laptop restarts now."
+kdialog --msgbox "All files are back. The computer restarts now."
 systemctl reboot
