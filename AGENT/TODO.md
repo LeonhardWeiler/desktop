@@ -19,3 +19,12 @@
    stays), then the age key (`age-keygen`, new recipient in `.sops.yaml`, `sudo sops updatekeys modules/secrets.yaml`, new `sops-age-legion` and `sops-age-pc` in Bitwarden).
 5. `restore.sh` is only checked with shellcheck, never run end to end (Bitwarden login, age key install via sudo,
    rsync as root via the backup key, marker). Run it on the reinstall of item 1 and fix what breaks.
+6. Sync `~/files/school` between pc and legion with Syncthing, the NAS (`syncthing-leonhard` in
+   `~/files/repos/nas/syncthing.nix`) as always-on hub at `/data/leonhard-files/school`. Backups stay per host.
+   - Merge once by hand: compare both copies (`rsync -avun --itemize-changes`, or the legion copy in
+     `backup/legion` on the NAS), resolve conflicts, put the result on the NAS.
+   - New module `syncthing.nix`: `services.syncthing` as user service, NAS device (port 22000 + uid - 1000 = 22001
+     over Tailscale) and folder `school` declared, global/local announce and relays off like on the NAS.
+   - NAS repo: add the pc and legion device IDs to `site.nix` under `syncthing.leonhard`.
+   - `.stignore`: `node_modules`, `.direnv`, `result`.
+   - `HTL4/waentw/.git` is synced too; do not work on it on both hosts at the same time.
