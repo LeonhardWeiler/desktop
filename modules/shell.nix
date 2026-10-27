@@ -37,7 +37,7 @@
           open = "xdg-open";
           dot = "cd ${repo}";
           rebuild = "git -C ${repo} pull --rebase --autostash && nh os switch";
-          update = "(cd ${repo} && git pull --rebase --autostash && nix flake update --commit-lock-file && ${nix-update} helium && ${nix-update} eitype && ${nix-update} --use-github-releases flow) && nh os switch && git -C ${repo} push";
+          update = "(export GITHUB_TOKEN=$(${pkgs.gh}/bin/gh auth token) && export NIX_CONFIG=\"access-tokens = github.com=$GITHUB_TOKEN\" && cd ${repo} && git pull --rebase --autostash && nix flake update --commit-lock-file && ${nix-update} helium && ${nix-update} eitype && ${nix-update} --use-github-releases flow) && nh os switch && git -C ${repo} push";
           backup = "journalctl -fu backup --since now & sudo systemctl start backup; sleep 1; kill $!";
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
