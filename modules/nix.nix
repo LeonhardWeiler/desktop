@@ -10,6 +10,11 @@
     ];
     nix.channel.enable = false;
     nix.settings.commit-lock-file-summary = "flake: update inputs";
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    nix.settings.extra-substituters = [ "https://nixos-raspberrypi.cachix.org" ];
+    nix.settings.extra-trusted-public-keys = [
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
     nix.optimise.automatic = true;
     documentation.nixos.enable = false;
     programs.nix-ld.enable = true;
