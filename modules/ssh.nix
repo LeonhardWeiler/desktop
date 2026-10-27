@@ -9,6 +9,9 @@
         IdentityFile ~/.ssh/nas
         IdentitiesOnly yes
         AddKeysToAgent confirm
+        ControlMaster auto
+        ControlPath ~/.ssh/cm-%C
+        ControlPersist 10m
       Host *
         AddKeysToAgent yes
     '';
