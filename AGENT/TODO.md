@@ -28,3 +28,7 @@
    - NAS repo: add the pc and legion device IDs to `site.nix` under `syncthing.leonhard`.
    - `.stignore`: `node_modules`, `.direnv`, `result`.
    - `HTL4/waentw/.git` is synced too; do not work on it on both hosts at the same time.
+7. Flow: from 2026-11-10, check whether Flow Desktop `v0.1.0-beta3` is released and `update` bumped `flow.nix` to it.
+   If it is flagged as pre-release on GitHub, `nix-update` skips it; bump `version` and `hash` by hand.
+   Then compare CPU with beta2: the WebKit main thread was ~90 % of a core during video on beta2, ~50 % on
+   nightly 733 (rest is WebKitGTK video painting, not Flow code; 0 % when paused).
