@@ -45,11 +45,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1793038930,
-        "narHash": "sha256-4kmfckKiErRwj0lKNDU+74GxMzZAnPuFLEjNJVZjTIY=",
+        "lastModified": 1793121261,
+        "narHash": "sha256-3YUwL28WoWVAEDK1qoveW/9aA086czfDHQ60S+bzZyY=",
         "owner": "motitschka",
         "repo": "Game37",
-        "rev": "d6633d7dac11cdef1cdccd4da7bfacfd0895546d",
+        "rev": "0b89e431eadf9590c232739193a2243a43dc6a61",
         "type": "github"
       },
       "original": {
@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793033486,
-        "narHash": "sha256-fXVURa0+CSCgaxLt8tmPNJq2U+fGYOwbk5j2YUe7kSc=",
+        "lastModified": 1793124281,
+        "narHash": "sha256-KdGTOgYXgMDA/ymTV10yLMt9tOjz9EmTgnTvaD+bhe4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7db163b2aee7e410e396b48aed02f646d742b9b8",
+        "rev": "1e3ebeb683d055d1675d3f64e6d2b186cb2ee504",
         "type": "github"
       },
       "original": {
