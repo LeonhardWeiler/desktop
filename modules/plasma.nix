@@ -97,6 +97,7 @@ in
               {
                 iconTasks = {
                   launchers = [
+                    "applications:flow.desktop"
                     "applications:signal.desktop"
                     "applications:com.mitchellh.ghostty.desktop"
                     "applications:t3code.desktop"
