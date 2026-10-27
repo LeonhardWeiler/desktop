@@ -154,6 +154,7 @@ in
               "Places Icons Static Size" = 22;
             };
           };
+          spectaclerc.GuiConfig.quitAfterSaveCopyExport = true;
           baloofilerc."Basic Settings".Indexing-Enabled = false;
           kwalletrc.Wallet."First Use" = false;
           krunnerrc.Plugins.baloosearchEnabled = false;
