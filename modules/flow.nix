@@ -12,6 +12,7 @@ let
     in
     appimageTools.wrapType2 {
       inherit pname version src;
+      extraPkgs = pkgs: [ pkgs.libgpg-error ];
       extraInstallCommands = ''
         install -Dm644 "${contents}/Flow Beta.desktop" $out/share/applications/flow.desktop
         cp -r ${contents}/usr/share/icons $out/share/
