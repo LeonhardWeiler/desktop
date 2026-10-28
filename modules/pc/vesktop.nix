@@ -2,6 +2,6 @@
   flake.modules.nixos.pc =
     { pkgs, ... }:
     {
-      environment.systemPackages = [ pkgs.discord ];
+      environment.systemPackages = [ pkgs.vesktop ];
     };
 }
