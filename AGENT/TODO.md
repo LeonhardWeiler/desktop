@@ -32,3 +32,19 @@
    If it is flagged as pre-release on GitHub, `nix-update` skips it; bump `version` and `hash` by hand.
    Then compare CPU with beta2: the WebKit main thread was ~90 % of a core during video on beta2, ~50 % on
    nightly 733 (rest is WebKitGTK video painting, not Flow code; 0 % when paused).
+8. Printer hardening (HP LaserJet Pro MFP M127fw, now on USB at `raspi`, see `~/files/repos/raspi`).
+   On 2026-10-27 it had firmware 20150228, no admin password, and its web UI open over HTTP on 8080.
+   - While still on the LAN: update the firmware (control panel → web services → check for updates, or HP's
+     Windows updater), set an admin password in the web UI (`http://<ip>:8080` → security).
+   - On the control panel: WiFi, Wi-Fi Direct, web services/ePrint and SNMP off.
+   - Unplug the LAN cable and the fax phone line. Check nothing answers on 631/9100/515/8080 in
+     192.168.178.0/24 anymore, then print and scan once via https://raspi.taild9564d.ts.net.
+9. Router hardening (FRITZ!Box at 192.168.178.1).
+   - FRITZ!OS on the latest version, automatic updates on.
+   - Strong admin password, login with user name, 2FA for important changes on.
+   - Internet access to the box (MyFRITZ!, remote access) off unless needed; no port forwards or UPnP
+     port sharing that are not needed; UPnP off.
+   - WPS off, WPA3 (WPA2 + WPA3 mixed if old devices need it), long WiFi key.
+   - Guest WiFi for visitors and IoT.
+   - DHCP: hand out the router as DNS (the old Pi-hole on 192.168.178.10 is gone); keep 192.168.178.10 (raspi)
+     and 192.168.178.50 (nas) outside the DHCP range or reserved.
