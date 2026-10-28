@@ -48,3 +48,6 @@
    - Guest WiFi for visitors and IoT.
    - DHCP: hand out the router as DNS (the old Pi-hole on 192.168.178.10 is gone); keep 192.168.178.10 (raspi)
      and 192.168.178.50 (nas) outside the DHCP range or reserved.
+10. Tailnet Lock: enable it so a stolen node key or a compromised Tailscale control plane cannot add nodes.
+    `tailscale lock init` with pc, legion and nas as signing nodes; store the disablement secrets in Bitwarden.
+    Every new node (reinstall, new phone) then needs `tailscale lock sign` from a signing node.
