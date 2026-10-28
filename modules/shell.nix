@@ -42,7 +42,7 @@
           notes = "cd $HOME/files/repos/notes/";
           arst = "sudo shutdown now";
           todo = ''nvim "$(git rev-parse --show-toplevel)/AGENT/TODO.md"'';
-          todos = ''find ~/files -name node_modules -prune -o -path '*/AGENT/TODO.md' -print | while read -r f; do f=''${f%/AGENT/TODO.md}; printf '\n== %s\n' "''${f#$HOME/files/}"; cat "$f/AGENT/TODO.md"; done | less'';
+          todos = ''find ~/files -name node_modules -prune -o -path '*/AGENT/TODO.md' -print | sort | while read -r f; do r=''${f%/AGENT/TODO.md}; printf '# %s\n\n' "''${r#$HOME/files/}"; sed '/^# TODO/d; s/^#/##/' "$f"; echo; done > "$XDG_RUNTIME_DIR/todos.md" && nvim -R "$XDG_RUNTIME_DIR/todos.md"'';
           camera = "ffplay -f v4l2 /dev/video0 -vf hflip -x 1280 -y 720";
           screenshot = "spectacle --region";
         };
