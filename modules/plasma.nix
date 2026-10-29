@@ -148,12 +148,15 @@ in
                 tiles = map (width: { inherit width; }) display.tiles;
               };
             };
-            Plugins.magnifierEnabled = true;
+            Plugins = {
+              magnifierEnabled = true;
+              zoomEnabled = false;
+            };
             Effect-magnifier = {
-              PointerAxisGestureModifiers = "Alt";
               Width = 400;
               Height = 400;
             };
+            Effect-zoom.PointerAxisGestureModifiers = "Alt";
           };
           dolphinrc = {
             MainWindow.MenuBar = "Disabled";
