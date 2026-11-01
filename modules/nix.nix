@@ -4,6 +4,19 @@
     imports = [ inputs.nix-index-database.nixosModules.nix-index ];
     system.stateVersion = "26.11";
     nixpkgs.config.allowUnfree = true;
+    nixpkgs.overlays = [
+      (_: prev: {
+        inherit
+          (import inputs.nixpkgs-unstable {
+            config.allowUnfree = true;
+            system = prev.stdenv.hostPlatform.system;
+          })
+          claude-code
+          codex
+          t3code
+          ;
+      })
+    ];
     nix.settings.experimental-features = [
       "nix-command"
       "flakes"
