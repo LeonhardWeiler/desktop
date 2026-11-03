@@ -45,4 +45,5 @@
 
 - NAS: `root@nas` over Tailscale (100.65.0.90), NixOS, config in `~/files/repos/nas`.
 - Server: `deploy@server` over Tailscale (100.125.41.118), NixOS, config in `~/files/school/HTL4/waentw/server-config`.
+- PDF/X-4 for print (FOGRA52): `nix run ~/files/repos/pdfx -- in.pdf out.pdf <bleed_mm>` on a Typst PDF compiled with `--pdf-standard 1.6`; as flake input `git+file:///home/leo/files/repos/pdfx`. See its README.
 - Anthropic Pro plan: be economical with tokens, use subagents only when needed.
