@@ -9,7 +9,6 @@
         enable = true;
         alsa.enable = true;
         pulse.enable = true;
-        jack.enable = true;
         extraLv2Packages = lv2;
         extraConfig.pipewire."99-custom"."context.properties" = {
           "default.clock.min-quantum" = 256;
@@ -61,11 +60,6 @@
             };
           }
         ];
-        extraConfig.jack."20-dj-jack"."jack.properties" = {
-          "node.latency" = "256/48000";
-          "node.rate" = "1/48000";
-          "node.lock-quantum" = true;
-        };
       };
       security.rtkit.enable = true;
       security.pam.loginLimits = [
