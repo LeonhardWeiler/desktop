@@ -17,7 +17,10 @@
           zed-editor
           ktailctl
           ktimetracker
-          figma-agent
+          (figma-agent.overrideAttrs (o: {
+            nativeBuildInputs = o.nativeBuildInputs ++ [ pkg-config ];
+            buildInputs = o.buildInputs ++ [ zstd ];
+          }))
           ghostty
           typst
           jq

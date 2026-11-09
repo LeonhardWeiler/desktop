@@ -46,7 +46,9 @@ in
       ];
       services.voxtype = {
         enable = true;
-        package = pkgs.voxtype.override { vulkanSupport = true; };
+        package = (pkgs.voxtype.override { vulkanSupport = true; }).overrideAttrs (o: {
+          buildInputs = o.buildInputs ++ [ pkgs.sqlite ];
+        });
         loadModels = [ model ];
         environment.PATH = "/etc/profiles/per-user/%u/bin:/run/current-system/sw/bin";
         settings = {
