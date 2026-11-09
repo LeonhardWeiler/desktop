@@ -42,6 +42,7 @@ in
           "tailscaled.service"
         ];
         startAt = "daily";
+        restartIfChanged = false;
         path = [
           pkgs.rsync
           pkgs.openssh
