@@ -28,11 +28,7 @@
    - NAS repo: add the pc and legion device IDs to `site.nix` under `syncthing.leonhard`.
    - `.stignore`: `node_modules`, `.direnv`, `result`.
    - `HTL4/waentw/.git` is synced too; do not work on it on both hosts at the same time.
-7. Printer firmware (HP LaserJet Pro MFP M127fw, USB only at `raspi`, printer `m127`) is still 20150228.
-   HP ships the update only as a Windows exe. Try: extract it with `7z`, send the contained
-   `product-update.acl` as a raw job (`lp -d m127 -o raw product-update.acl` on raspi), check the
-   version on the control panel. Otherwise use a Windows VM with USB passthrough.
-8. Router hardening (FRITZ!Box at 192.168.178.1).
+7. Router hardening (FRITZ!Box at 192.168.178.1).
    - FRITZ!OS on the latest version, automatic updates on.
    - Strong admin password, login with user name, 2FA for important changes on.
    - Internet access to the box (MyFRITZ!, remote access) off unless needed; no port forwards or UPnP
