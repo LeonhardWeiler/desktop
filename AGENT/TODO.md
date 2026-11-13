@@ -28,13 +28,10 @@
    - NAS repo: add the pc and legion device IDs to `site.nix` under `syncthing.leonhard`.
    - `.stignore`: `node_modules`, `.direnv`, `result`.
    - `HTL4/waentw/.git` is synced too; do not work on it on both hosts at the same time.
-7. Printer hardening (HP LaserJet Pro MFP M127fw, now on USB at `raspi`, see `~/files/repos/raspi`).
-   On 2026-10-27 it had firmware 20150228, no admin password, and its web UI open over HTTP on 8080.
-   - While still on the LAN: update the firmware (control panel → web services → check for updates, or HP's
-     Windows updater), set an admin password in the web UI (`http://<ip>:8080` → security).
-   - On the control panel: WiFi, Wi-Fi Direct, web services/ePrint and SNMP off.
-   - Unplug the LAN cable and the fax phone line. Check nothing answers on 631/9100/515/8080 in
-     192.168.178.0/24 anymore, then print and scan once via https://raspi.taild9564d.ts.net.
+7. Printer firmware (HP LaserJet Pro MFP M127fw, USB only at `raspi`, printer `m127`) is still 20150228.
+   HP ships the update only as a Windows exe. Try: extract it with `7z`, send the contained
+   `product-update.acl` as a raw job (`lp -d m127 -o raw product-update.acl` on raspi), check the
+   version on the control panel. Otherwise use a Windows VM with USB passthrough.
 8. Router hardening (FRITZ!Box at 192.168.178.1).
    - FRITZ!OS on the latest version, automatic updates on.
    - Strong admin password, login with user name, 2FA for important changes on.
