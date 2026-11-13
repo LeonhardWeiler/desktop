@@ -78,6 +78,6 @@
           ''
         )
       ];
-      fonts.fontconfig.localConf = "<fontconfig><dir>~/files/jl/grafiken/fonts</dir></fontconfig>";
+      fonts.fontconfig.localConf = "<fontconfig><dir>~/files/politik/grafiken/fonts</dir></fontconfig>";
     };
 }
