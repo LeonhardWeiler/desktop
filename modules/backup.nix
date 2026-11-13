@@ -13,10 +13,17 @@ in
     let
       home = config.users.users.${user}.home;
       exclude = [
+        "${home}/.bun"
         "${home}/.cache"
+        "${home}/.cargo/registry"
         "${home}/.local/share/go"
+        "${home}/.local/share/pnpm"
+        "${home}/.local/share/Steam"
+        "${home}/.local/share/Trash"
         "${home}/.local/share/voxtype/models"
+        ".direnv"
         "node_modules"
+        "target"
       ];
     in
     {
