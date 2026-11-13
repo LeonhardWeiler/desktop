@@ -3,7 +3,13 @@
     { config, pkgs, ... }:
     let
       repo = "${config.home.homeDirectory}/files/repos/desktop";
-      nix-update = "${pkgs.nix-update}/bin/nix-update --flake --commit";
+      nix-update = "${
+        pkgs.nix-update.overrideAttrs (o: {
+          postPatch = (o.postPatch or "") + ''
+            substituteInPlace nix_update/options.py --replace-fail '"flake", "metadata"' '"flake", "archive"'
+          '';
+        })
+      }/bin/nix-update --flake --commit";
       vars = {
         ELECTRON_OZONE_PLATFORM_HINT = "wayland";
         EDITOR = "nvim";
