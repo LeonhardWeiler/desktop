@@ -10,6 +10,9 @@ Take one issue to a PR that is ready for the user to merge. Never merge.
 
 ## 1. Pick the issue
 
+- First clean up: `git fetch --prune`, then for each branch whose upstream is `[gone]`
+  remove its worktree with `git worktree remove` (never `--force`) and delete the branch
+  with `git branch -D`. Leave worktrees with uncommitted changes and name them in the report.
 - A number given: that issue. A task given: file it as an issue first.
 - Nothing given: the oldest open issue without the `blocked` or `later` label, without an
   open PR and without open sub-issues; `bug` before the rest.
