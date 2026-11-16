@@ -20,6 +20,8 @@
 ## Workflow
 
 - Make a plan before larger changes. Ask when something is unclear.
+- Ask questions with the AskUserQuestion tool, one decision per question, recommended option first; never as a text list. This also applies inside skills such as grilling.
+- Never `rm -rf` a path held in a variable or glob. Leave temp dirs in /tmp or delete one literal, checked path.
 - Commit after each step. Push at the end of the workflow.
 - Provide toolchains and dependencies through a `flake.nix`, not system-wide installs.
 - Before each commit run the fast checks (typecheck, lint, unit tests) and the slow tests the change affects; run the full suite before the push.
