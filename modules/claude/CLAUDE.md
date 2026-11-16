@@ -15,7 +15,7 @@
 
 - No comments by default. A comment only carries what the code cannot, e.g. something that is weirdly done only in this project and would CONFUSE others.
 - Never explain why an option was chosen. State the thing and stop.
-- Keep docs, READMEs and CLAUDE.md files short and docs as well as READMEs easy to understand and parse for humans, the AGENT files can be more convoluted and more detailed with the goal to provide the minimum information needed to perform the tasks as wished.
+- Keep docs, READMEs and CLAUDE.md files short and easy for humans to read and parse.
 
 ## Workflow
 
@@ -27,7 +27,7 @@
 - One PR per issue, body `Closes #n`, the PR template filled in, squash merge. Each change in its own git worktree; commit after each step, stage files by name, never `git commit -a`.
 - Before each commit run the fast checks (typecheck, lint, unit tests) and the slow tests the change affects. CI on the PR runs the full suite; wait for it with `watch_pull_request`, not by polling.
 - Direct pushes to main only for docs.
-- Repos that still have `AGENT/TODO.md`, and repos outside GitHub: commit on main, push at the end; `AGENT/` holds `TODO.md` and `project-health-report.html`, maintained by `implement-todo` and `review-and-update-report`.
+- Repos outside GitHub: commit on main, push at the end; `AGENT/` holds `TODO.md` and `project-health-report.html`, maintained by `implement-todo` and `review-and-update-report`.
 - Provide toolchains and dependencies through a `flake.nix`, not system-wide installs.
 
 ## Language
