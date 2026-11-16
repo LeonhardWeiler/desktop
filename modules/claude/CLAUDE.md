@@ -27,6 +27,7 @@
 - A list of points handed over (a message or a Markdown file) becomes issues: check each against existing issues and the code first, a heading becomes a parent issue with its points as sub-issues, "später"/"wenn …" becomes `later` with that condition, unclear points are asked about together. Report what was already done or a duplicate, then delete the file.
 - One PR per issue, body `Closes #n`, the PR template filled in, squash merge. Each change in its own git worktree; commit after each step, stage files by name, never `git commit -a`.
 - Before each commit run the fast checks (typecheck, lint, unit tests) and the slow tests the change affects. CI on the PR runs the full suite; wait for it with `watch_pull_request`, not by polling.
+- "mach #a #b …" (several issues): this thread organizes and writes no code. Per issue one `t3_thread_launch`, title `#n <issue title>`, `workspaceStrategy` worktree from `origin/main` with `startFromOrigin: true`, message `auto-ship #n` plus what I said about it. Issues that depend on each other start one after another. A thread that needs me or is unsure asks in its own thread and leaves its PR open. Then `t3_thread_wait` on each and report per thread: link, PR, merged or what waits on me.
 - Direct pushes to main only for docs.
 - Repos outside GitHub: commit on main, push at the end; `AGENT/` holds `TODO.md` and `project-health-report.html`, maintained by `implement-todo` and `review-and-update-report`.
 - Provide toolchains and dependencies through a `flake.nix`, not system-wide installs.
