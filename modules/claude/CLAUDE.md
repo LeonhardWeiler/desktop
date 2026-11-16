@@ -22,10 +22,12 @@
 - Make a plan before larger changes. Ask when something is unclear.
 - Ask questions with the AskUserQuestion tool, one decision per question, recommended option first; never as a text list. This also applies inside skills such as grilling.
 - Never `rm -rf` a path held in a variable or glob. Leave temp dirs in /tmp or delete one literal, checked path.
-- Commit after each step. Push at the end of the workflow.
+- Work is tracked in GitHub issues. The skill `ship` takes one to a PR ready to merge, `auto-ship` also merges it, `review` files new ones.
+- One PR per issue, body `Closes #n`, the PR template filled in, squash merge. Each change in its own git worktree; commit after each step, stage files by name, never `git commit -a`.
+- Before each commit run the fast checks (typecheck, lint, unit tests) and the slow tests the change affects. CI on the PR runs the full suite; wait for it with `watch_pull_request`, not by polling.
+- Direct pushes to main only for docs.
+- Repos that still have `AGENT/TODO.md`, and repos outside GitHub: commit on main, push at the end; `AGENT/` holds `TODO.md` and `project-health-report.html`, maintained by `implement-todo` and `review-and-update-report`.
 - Provide toolchains and dependencies through a `flake.nix`, not system-wide installs.
-- Before each commit run the fast checks (typecheck, lint, unit tests) and the slow tests the change affects; run the full suite before the push.
-- `AGENT/` holds `TODO.md` and `project-health-report.html`, maintained by the skills `implement-todo` and `review-and-update-report`. It is not part of the product.
 
 ## Language
 
