@@ -35,7 +35,7 @@
       enable = true;
       flake = "/home/${config.user}/files/repos/desktop";
       clean.enable = true;
-      clean.extraArgs = "--keep-since 30d --keep 5";
+      clean.extraArgs = "--keep-since 3d --keep 5";
     };
     programs.nix-index-database.comma.enable = true;
     services.dbus.implementation = "broker";
