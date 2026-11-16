@@ -15,6 +15,10 @@ Take one issue to a PR that is ready for the user to merge. Never merge.
   open PR and without open sub-issues; `bug` before the rest.
   `gh issue list --state open --json number,title,labels` and
   `gh issue view <n> --json body,subIssues,closedByPullRequestsReferences`.
+- Before that, read the open `later` issues. One whose condition is met (its date
+  has passed, the issue or feature it waits for is closed, the dependency exists):
+  propose it with AskUserQuestion, doing it now first. On yes, remove `later` and
+  take it; on no, take the next issue.
 - An open PR that closes the issue exists: continue on its branch.
 - Too big for one PR, or vague: propose sub-issues with AskUserQuestion. On yes,
   create them with `gh issue create --parent <n>` and take the first.
