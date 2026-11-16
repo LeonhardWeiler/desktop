@@ -23,6 +23,7 @@
 - Ask questions with the AskUserQuestion tool, one decision per question, recommended option first; never as a text list. This also applies inside skills such as grilling.
 - Never `rm -rf` a path held in a variable or glob. Leave temp dirs in /tmp or delete one literal, checked path.
 - Work is tracked in GitHub issues. The skill `ship` takes one to a PR ready to merge, `auto-ship` also merges it, `review` files new ones.
+- Work that can only happen later (after another feature, at a date, once a dependency exists) is an issue with the label `later`; work that waits on something outside the repo gets `blocked`. Write such todos as issues, never as files or comments.
 - One PR per issue, body `Closes #n`, the PR template filled in, squash merge. Each change in its own git worktree; commit after each step, stage files by name, never `git commit -a`.
 - Before each commit run the fast checks (typecheck, lint, unit tests) and the slow tests the change affects. CI on the PR runs the full suite; wait for it with `watch_pull_request`, not by polling.
 - Direct pushes to main only for docs.

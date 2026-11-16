@@ -11,7 +11,7 @@ Take one issue to a PR that is ready for the user to merge. Never merge.
 ## 1. Pick the issue
 
 - A number given: that issue. A task given: file it as an issue first.
-- Nothing given: the oldest open issue without the `blocked` label, without an
+- Nothing given: the oldest open issue without the `blocked` or `later` label, without an
   open PR and without open sub-issues; `bug` before the rest.
   `gh issue list --state open --json number,title,labels` and
   `gh issue view <n> --json body,subIssues,closedByPullRequestsReferences`.
@@ -30,7 +30,7 @@ Take one issue to a PR that is ready for the user to merge. Never merge.
   subject, the repo's PR template filled in, `Closes #<n>`. The description
   starts with the problem in 1 to 2 sentences, not a list of changes.
 - Stay within the issue. Anything else worth doing becomes a new issue, linked in
-  the PR.
+  the PR; label it `later` if it can only be done later.
 
 ## 3. Proof
 

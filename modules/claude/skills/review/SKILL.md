@@ -31,7 +31,8 @@ user-invocable: true
 
 One issue per finding you would fix: title `area: problem`, body with what is
 wrong, where (`file:line`), and the fix. Label `bug` for defects, `enhancement`
-for improvements, `blocked` if it waits on something outside the repo.
+for improvements, `later` if it can only be done later, `blocked` if it waits on
+something outside the repo.
 
 Do not file nitpicks; list them in the reply only.
 
