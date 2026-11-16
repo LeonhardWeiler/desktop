@@ -7,6 +7,9 @@
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.timeout = 1;
     zramSwap.enable = true;
+    zramSwap.memoryPercent = 100;
+    boot.kernel.sysctl."vm.swappiness" = 180;
+    boot.kernel.sysctl."vm.page-cluster" = 0;
     hardware.bluetooth.enable = true;
   };
 }
