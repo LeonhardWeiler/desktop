@@ -1,7 +1,7 @@
 { config, ... }:
 let
   inherit (config) email name;
-  schoolEmail = "weilerl@edu.htl-villach.at";
+  schoolEmail = "leonhard.weiler@edu.htl-villach.at";
 in
 {
   flake.modules.homeManager.git =
