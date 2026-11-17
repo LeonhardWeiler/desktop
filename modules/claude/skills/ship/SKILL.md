@@ -53,9 +53,10 @@ the user instead of calling the PR ready.
 
 ## 4. Ready
 
-- Rebase on `origin/main` if behind, mark the PR ready, call
-  `watch_pull_request` and end the turn. Fix real CI failures, push, watch again.
-- Merge gate on the latest head: required checks green, branch up to date and
-  mergeable, proof covers the whole diff.
+- Mark the PR ready, call `watch_pull_request` and end the turn. Fix real CI
+  failures, push, watch again. Rebase on `origin/main` only on a merge conflict;
+  being behind is no reason.
+- Merge gate on the latest head: required checks green, mergeable, proof covers
+  the whole diff.
 - Then `unwatch_pull_request` and report: PR link, what changed, proof, and the
   decisions you made alone. The PR stays open for the user.

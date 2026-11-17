@@ -6,9 +6,10 @@ user-invocable: true
 
 # Auto-ship
 
-Follow [ship](../ship/SKILL.md) completely. At the merge gate, instead of
-handing off: `git fetch`, check the PR once more, then
-`gh pr merge <n> --squash --delete-branch`. Never use `--admin` or bypass a rule.
+Follow [ship](../ship/SKILL.md) completely. Once the PR is ready and the proof
+covers the whole diff, run `gh pr merge <n> --squash --delete-branch --auto`;
+GitHub merges when the required checks pass. Keep watching until it is merged
+and fix real CI failures. Never use `--admin` or bypass a rule.
 Report the PR link and the merge commit.
 
 If the gate cannot pass, stop as `ship` does and leave the PR open.
