@@ -29,10 +29,16 @@ in
             ${email},${schoolEmail} ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgP0BFI+h8vNSGDvyaL0CI3ULXr1ZEPZywRK/r79+5s
           '';
         };
-        includes = map (url: {
-          condition = "hasconfig:remote.*.url:${url}";
-          contents.user.email = schoolEmail;
-        }) [ "git@gitlab.com:*/**" "https://gitlab.com/**" ];
+        includes =
+          map
+            (url: {
+              condition = "hasconfig:remote.*.url:${url}";
+              contents.user.email = schoolEmail;
+            })
+            [
+              "git@gitlab.com:*/**"
+              "https://gitlab.com/**"
+            ];
         ignores = [
           "**/.claude/settings.local.json"
           "*.bak"
