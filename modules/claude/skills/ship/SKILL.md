@@ -45,7 +45,11 @@ Evidence you saw yourself in this session:
 
 - Reproduce the failure, fix it, watch the same reproduction pass.
 - A focused test that fails without the change, when the repo has tests for it.
-- For UI and runtime behaviour, run the app and look at it.
+- For UI and runtime behaviour, run the app and look at it. A visible change gets
+  before/after screenshots, motion or timing a short video. Push them to the
+  branch `pr-assets` (orphan, never merged) and embed them in the PR body as
+  `https://github.com/<owner>/<repo>/blob/<sha>/<path>?raw=true`. Never commit
+  them on the PR branch.
 - The fast checks and the slow tests the change touches.
 
 Write under Verification what was checked and what was not. Without proof, ask

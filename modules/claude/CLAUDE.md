@@ -10,16 +10,33 @@
 - Fix the root cause. A fault is fixed, not documented in a footnote.
 - Delete dead code and unreachable branches. No commented-out code; git log holds the history.
 - Check library APIs against the installed version, not from memory.
+- Every way in has a way out and a way to see it: open needs close, hide needs show. A one-way door is a bug.
+- A feature is done when every way to reach it works: button, menu, shortcut, command palette, each client and platform. Name in the report which applied.
+- React effects only sync with something outside React. Derive values in render, act in handlers.
+
+## Tests
+
+- Test what can break: logic, parsing, state, persistence, races, the code a bug fix changed. Not what types guarantee, trivial code, copy text or wiring.
+- Extend an existing test or table before writing a new one.
+- Test once, at the lowest layer that fails on main; not again in wrappers or callers.
+- A logic bug gets a failing test first, then the fix. A purely visual bug gets before/after captures and no test.
+- No sleeps, timeouts or retries in tests; wait for the event or state itself. A flaky test is fixed, not retried.
 
 ## Comments and prose
 
 - No comments by default. A comment only carries what the code cannot, e.g. something that is weirdly done only in this project and would CONFUSE others.
 - Never explain why an option was chosen. State the thing and stop.
 - Keep docs, READMEs and CLAUDE.md files short and easy for humans to read and parse.
+- Docs hold only what the code cannot show: decisions and their reasons, constraints across components, traps. Before adding a sentence, ask what a reader would get wrong without it; if the code answers it, leave it out. No field or method lists, no control-flow narration, no change logs.
+- User docs say per feature what it does, how to start and what is unintuitive; not what the UI already shows.
+- When a decision changes, rewrite or delete its text; never append the new state.
 
 ## Workflow
 
 - Make a plan before larger changes. Ask when something is unclear.
+- If a rule here fights the task, say so plainly and get my sign-off before breaking it.
+- Kill only a PID you captured at spawn, or the owner of your own port. Never kill by pattern (`pkill -f`, `pgrep | kill`): parallel worktrees and agents run on this machine.
+- Run dev servers from your own shell so they end with the session. Never detach them (`nohup`, `setsid`, `tmux`, `systemd-run`) unless I ask.
 - Ask questions with the AskUserQuestion tool, one decision per question, recommended option first; never as a text list. This also applies inside skills such as grilling.
 - Never `rm -rf` a path held in a variable or glob. Leave temp dirs in /tmp or delete one literal, checked path.
 - Work is tracked in GitHub issues. The skill `ship` takes one to a PR ready to merge, `auto-ship` also merges it, `review` files new ones.
