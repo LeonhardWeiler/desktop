@@ -37,6 +37,7 @@
           effortLevel = "medium";
           autoCompactWindow = 200000;
           promptSuggestionEnabled = false;
+          autoMemoryEnabled = false;
           skipDangerousModePermissionPrompt = true;
           theme = "dark";
           env.DISABLE_AUTOUPDATER = "1";
