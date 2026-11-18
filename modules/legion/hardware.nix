@@ -9,6 +9,7 @@
       "sd_mod"
     ];
     boot.kernelModules = [ "kvm-amd" ];
+    hardware.nvidia.powerManagement.finegrained = false;
     services.udev.extraRules = ''
       ACTION=="add|bind", SUBSYSTEM=="platform", DRIVER=="ideapad_acpi", ATTR{conservation_mode}="1"
     '';
