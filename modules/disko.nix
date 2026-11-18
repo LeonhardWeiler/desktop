@@ -2,6 +2,10 @@
 {
   flake.modules.nixos.disko = {
     imports = [ inputs.disko.nixosModules.disko ];
+    services.btrfs.autoScrub = {
+      enable = true;
+      fileSystems = [ "/" ];
+    };
     disko.devices.disk.ssd = {
       device = "/dev/nvme0n1";
       content = {
