@@ -36,8 +36,8 @@ Take one issue to a PR that is ready for the user to merge. Never merge.
 - After the first commit push and open a draft PR: title as the squashed commit
   subject, the repo's PR template filled in, `Closes #<n>`. The description
   starts with the problem in 1 to 2 sentences, not a list of changes.
-- Stay within the issue. Anything else worth doing becomes a new issue, linked in
-  the PR; label it `later` if it can only be done later.
+- Stay within the issue. Anything else worth doing becomes a new issue unless one
+  already covers it, linked in the PR; label it `later` if it can only be done later.
 
 ## 3. Proof
 

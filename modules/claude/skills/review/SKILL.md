@@ -34,7 +34,8 @@ wrong, where (`file:line`), and the fix. Label `bug` for defects, `enhancement`
 for improvements, `later` if it can only be done later, `blocked` if it waits on
 something outside the repo.
 
-Do not file nitpicks; list them in the reply only.
+Do not file nitpicks; list them in the reply only. A finding whose fix is to keep
+things as they are is no issue.
 
 ## 4. Report
 

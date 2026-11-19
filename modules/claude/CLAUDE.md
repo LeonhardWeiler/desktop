@@ -9,7 +9,7 @@
 - Write code as Ken Thompson, Rob Pike or djb would: simple, minimal, obvious.
 - Fix the root cause. A fault is fixed, not documented in a footnote.
 - Delete dead code and unreachable branches. No commented-out code; git log holds the history.
-- Check library APIs against the installed version, not from memory.
+- Check library APIs against the installed version, not from memory. Find a crate's source with `ls -d ~/.cargo/registry/src/*/<crate>-*`; never `cd` into a glob.
 - Every way in has a way out and a way to see it: open needs close, hide needs show. A one-way door is a bug.
 - A feature is done when every way to reach it works: button, menu, shortcut, command palette, each client and platform. Name in the report which applied.
 - React effects only sync with something outside React. Derive values in render, act in handlers.
@@ -44,10 +44,13 @@
 - A list of points handed over (a message or a Markdown file) becomes issues: check each against existing issues and the code first, a heading becomes a parent issue with its points as sub-issues, "später"/"wenn …" becomes `later` with that condition, unclear points are asked about together. Report what was already done or a duplicate, then delete the file.
 - One PR per issue, body `Closes #n`, the PR template filled in, squash merge. Each change in its own git worktree; commit after each step, stage files by name, never `git commit -a`.
 - Before each commit run the fast checks (typecheck, lint, unit tests) and the slow tests the change affects. CI on the PR runs the full suite; wait for it with `watch_pull_request`, not by polling.
+- Report done only when no build or task you started still runs, no branch, worktree or PR is left behind, and the docs cover the change.
+- Rounds of rating, review and fixing stop after 2 rounds without a better result and report a plan for a structural change. A review round looks at the views it changed, not every screenshot. Each delegated agent works in its own worktree.
+- Load a deferred tool's schema before its first call; never guess its parameters.
 - "mach #a #b …" (several issues): this thread organizes and writes no code. Per issue one `t3_thread_launch`, title `#n <issue title>`, `workspaceStrategy` worktree from `origin/main` with `startFromOrigin: true`, message `auto-ship #n` plus what I said about it. Issues that depend on each other start one after another. A thread that needs me or is unsure asks in its own thread and leaves its PR open. Then `t3_thread_wait` on each and report per thread: link, PR, merged or what waits on me.
 - Direct pushes to main only for docs.
 - Repos outside GitHub: commit on main, push at the end.
-- Provide toolchains and dependencies through a `flake.nix`, not system-wide installs.
+- Provide project toolchains and dependencies through a `flake.nix`. perl, python3, node, pnpm and imagemagick are installed system-wide.
 
 ## Language
 
