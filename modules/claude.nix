@@ -32,6 +32,7 @@
             ];
           };
           model = "opus";
+          cleanupPeriodDays = 36500;
           disableClaudeAiConnectors = true;
           language = "german";
           effortLevel = "medium";
