@@ -69,6 +69,9 @@ in
           PrivateMounts = true;
         };
         script = ''
+          case $(busctl get-property org.freedesktop.NetworkManager /org/freedesktop/NetworkManager org.freedesktop.NetworkManager Metered) in
+            "u 1" | "u 3") echo "metered connection, skipping backup"; exit 0 ;;
+          esac
           snaps=(/mnt/btrfs/snapshots/home.*)
           mount --bind "''${snaps[-1]}" /home
           rsync -a --info=name1,stats2 --relative --numeric-ids -M--fake-super --delete --delete-excluded \
