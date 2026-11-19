@@ -24,6 +24,11 @@
           ghostty
           typst
           jq
+          perl
+          python3
+          nodejs
+          pnpm
+          imagemagick
           rsync
           wget
           zip
