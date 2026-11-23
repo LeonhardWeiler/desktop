@@ -23,6 +23,7 @@
     networking.modemmanager.enable = false;
     services.tailscale.enable = true;
     services.tailscale.extraSetFlags = [ "--operator=${config.user}" ];
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 3773 ];
 
     users.users.${config.user} = {
       isNormalUser = true;
