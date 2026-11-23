@@ -14,6 +14,7 @@
       };
       systemd.paths.sops-install-secrets = {
         wantedBy = [ "multi-user.target" ];
+        unitConfig.DefaultDependencies = false;
         pathConfig.PathChanged = config.sops.age.keyFile;
       };
     };
