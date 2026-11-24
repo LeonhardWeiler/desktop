@@ -3,10 +3,10 @@ let
     { appimageTools, fetchurl }:
     let
       pname = "effectcraft";
-      version = "0.24.1";
+      version = "0.25.1";
       src = fetchurl {
         url = "https://github.com/storytold/effectcraft/releases/download/v${version}/effectcraft-${version}-linux-x86_64.AppImage";
-        hash = "sha256-n4oWz3QUfJ4qw7ZfpvW+lqPhDq2S3fCNVE9dOZCtZNw=";
+        hash = "sha256-faFPXKggJ+LLcJ3JGAbHDOQf9DKt8n0tCjeInSG3obo=";
       };
       contents = appimageTools.extract { inherit pname version src; };
     in
